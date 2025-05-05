@@ -6,6 +6,7 @@ import {
   BsTwitterX,
   BsYoutube,
 } from "react-icons/bs";
+import { SOCIAL_LINKS } from "../constants/socials";
 
 const Footer = () => {
   const variants = {
@@ -84,7 +85,7 @@ const Footer = () => {
             <h3 className="text-white text-lg font-medium">Connect</h3>
             <div className="flex gap-4">
               <motion.a
-                href="https://youtube.com"
+                href={SOCIAL_LINKS.YOUTUBE}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, color: "#ff0000" }}
@@ -93,7 +94,7 @@ const Footer = () => {
                 <BsYoutube />
               </motion.a>
               <motion.a
-                href="https://linkedin.com"
+                href={SOCIAL_LINKS.LINKEDIN}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, color: "#0077b5" }}
@@ -102,7 +103,7 @@ const Footer = () => {
                 <BsLinkedin />
               </motion.a>
               <motion.a
-                href="https://github.com"
+                href={SOCIAL_LINKS.GITHUB}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, color: "#f1502f" }}
@@ -111,7 +112,7 @@ const Footer = () => {
                 <BsGithub />
               </motion.a>
               <motion.a
-                href="https://twitter.com"
+                href={SOCIAL_LINKS.TWITTER}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, color: "#1da1f2" }}
@@ -120,7 +121,7 @@ const Footer = () => {
                 <BsTwitterX />
               </motion.a>
               <motion.a
-                href="https://facebook.com"
+                href={SOCIAL_LINKS.FACEBOOK}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, color: "#1877f2" }}

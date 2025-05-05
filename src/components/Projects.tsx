@@ -75,6 +75,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <motion.img
           src={project.src}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="w-full cursor-pointer rounded-2xl md:w-[300px] border border-gray-800/50"
           whileHover={{
             scale: 1.05,

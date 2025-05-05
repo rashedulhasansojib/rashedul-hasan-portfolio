@@ -1,5 +1,6 @@
 import image from "../assets/hero.png";
 import { motion, useReducedMotion } from "framer-motion";
+import { HiDownload } from "react-icons/hi";
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -51,13 +52,23 @@ const Hero = () => {
             and improve my skills. Let's connect and build something amazing
             together!
           </p>
-          <a
-            href="#contact"
-            className="bg-gradient-to-r from-blue-500 to-pink-500 px-6 py-3 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/30"
-            aria-label="Contact me"
-          >
-            Let's Work Together
-          </a>
+          <div className="flex gap-4 flex-wrap justify-center">
+            <a
+              href="#contact"
+              className="bg-gradient-to-r from-blue-500 to-pink-500 px-6 py-3 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/30"
+              aria-label="Contact me"
+            >
+              Let's Work Together
+            </a>
+            <a
+              href="/resume.pdf"
+              download
+              className="bg-gradient-to-r from-pink-500 to-blue-500 px-6 py-3 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/30 flex items-center gap-2"
+              aria-label="Download CV"
+            >
+              Download CV <HiDownload className="text-xl" aria-hidden="true" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

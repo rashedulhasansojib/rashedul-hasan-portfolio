@@ -8,6 +8,7 @@ import {
   BsX,
 } from "react-icons/bs";
 import { useState, useEffect, useRef } from "react";
+import { SOCIAL_LINKS } from "../constants/socials";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,27 +80,27 @@ const Navbar = () => {
       {/* Desktop Social Icons */}
       <ul className="hidden md:flex gap-5">
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-red-500 hover:opacity-100">
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+          <a href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
             <BsYoutube />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <a href={SOCIAL_LINKS.LINKEDIN} target="_blank" rel="noopener noreferrer">
             <BsLinkedin />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-orange-500 hover:opacity-100">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <a href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
             <BsGithub />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <a href={SOCIAL_LINKS.TWITTER} target="_blank" rel="noopener noreferrer">
             <BsTwitterX />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <a href={SOCIAL_LINKS.FACEBOOK} target="_blank" rel="noopener noreferrer">
             <BsFacebook />
           </a>
         </li>
@@ -165,27 +166,27 @@ const Navbar = () => {
           {/* Mobile Social Icons */}
           <ul className="mt-4 flex justify-center gap-5">
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-red-500 hover:opacity-100">
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+              <a href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
                 <BsYoutube />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <a href={SOCIAL_LINKS.LINKEDIN} target="_blank" rel="noopener noreferrer">
                 <BsLinkedin />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-orange-500 hover:opacity-100">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <a href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
                 <BsGithub />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <a href={SOCIAL_LINKS.TWITTER} target="_blank" rel="noopener noreferrer">
                 <BsTwitterX />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <a href={SOCIAL_LINKS.FACEBOOK} target="_blank" rel="noopener noreferrer">
                 <BsFacebook />
               </a>
             </li>
