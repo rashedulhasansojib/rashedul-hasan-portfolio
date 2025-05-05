@@ -44,7 +44,7 @@ const Hero = () => {
             Rashedul Hasan
           </h1>
           <h2 className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent text-2xl md:text-3xl">
-            Web Developer
+            Full Stack Web Developer
           </h2>
           <p className="md:text-base text-pretty text-sm text-gray-400 mb-6">
             I am a passionate web developer with a knack for creating dynamic

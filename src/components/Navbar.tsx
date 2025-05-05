@@ -53,6 +53,14 @@ const Navbar = () => {
         </li>
         <li>
           <a
+            href="#about"
+            className="cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
+          >
+            About
+          </a>
+        </li>
+        <li>
+          <a
             href="#tech"
             className="cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
           >
@@ -80,27 +88,47 @@ const Navbar = () => {
       {/* Desktop Social Icons */}
       <ul className="hidden md:flex gap-5">
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-red-500 hover:opacity-100">
-          <a href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
+          <a
+            href={SOCIAL_LINKS.YOUTUBE}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsYoutube />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-          <a href={SOCIAL_LINKS.LINKEDIN} target="_blank" rel="noopener noreferrer">
+          <a
+            href={SOCIAL_LINKS.LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsLinkedin />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-orange-500 hover:opacity-100">
-          <a href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
+          <a
+            href={SOCIAL_LINKS.GITHUB}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsGithub />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100">
-          <a href={SOCIAL_LINKS.TWITTER} target="_blank" rel="noopener noreferrer">
+          <a
+            href={SOCIAL_LINKS.TWITTER}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsTwitterX />
           </a>
         </li>
         <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-          <a href={SOCIAL_LINKS.FACEBOOK} target="_blank" rel="noopener noreferrer">
+          <a
+            href={SOCIAL_LINKS.FACEBOOK}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsFacebook />
           </a>
         </li>
@@ -117,7 +145,7 @@ const Navbar = () => {
       </button>
 
       {/* Mobile Menu */}
-      <div 
+      <div
         ref={menuRef}
         className={`absolute top-full left-0 w-full bg-black/90 transition-all duration-300 md:hidden ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -132,6 +160,15 @@ const Navbar = () => {
                 onClick={toggleMenu}
               >
                 Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#about"
+                className="cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
+                onClick={toggleMenu}
+              >
+                About
               </a>
             </li>
             <li>
@@ -162,31 +199,51 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
-          
+
           {/* Mobile Social Icons */}
           <ul className="mt-4 flex justify-center gap-5">
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-red-500 hover:opacity-100">
-              <a href={SOCIAL_LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.YOUTUBE}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsYoutube />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-              <a href={SOCIAL_LINKS.LINKEDIN} target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsLinkedin />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-orange-500 hover:opacity-100">
-              <a href={SOCIAL_LINKS.GITHUB} target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsGithub />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-sky-500 hover:opacity-100">
-              <a href={SOCIAL_LINKS.TWITTER} target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.TWITTER}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsTwitterX />
               </a>
             </li>
             <li className="cursor-pointer text-xl opacity-70 transition-all duration-300 hover:text-blue-500 hover:opacity-100">
-              <a href={SOCIAL_LINKS.FACEBOOK} target="_blank" rel="noopener noreferrer">
+              <a
+                href={SOCIAL_LINKS.FACEBOOK}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsFacebook />
               </a>
             </li>
