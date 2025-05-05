@@ -44,7 +44,7 @@ const Navbar = () => {
       <ul className="hidden md:flex gap-10">
         <li>
           <a
-            href="#hero"
+            href="#home"
             className="cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
           >
             Home
@@ -126,7 +126,7 @@ const Navbar = () => {
           <ul className="flex flex-col items-center gap-4">
             <li>
               <a
-                href="#hero"
+                href="#home"
                 className="cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
                 onClick={toggleMenu}
               >
