@@ -1,11 +1,15 @@
-import image from "../assets/image.jpg";
+import image from "../assets/hero.png";
 import { motion, useReducedMotion } from "framer-motion";
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
 
-  const animationProps = shouldReduceMotion 
-    ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.5 } }
+  const animationProps = shouldReduceMotion
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        transition: { duration: 0.5 },
+      }
     : {};
 
   return (
