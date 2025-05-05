@@ -17,26 +17,26 @@ const Tech = () => {
 
   const technologies = [
     // MERN Stack
-    { icon: BiLogoMongodb, name: "MongoDB", color: "text-green-500" },
-    { icon: SiExpress, name: "Express.js", color: "text-white" },
-    { icon: BiLogoReact, name: "React", color: "text-blue-400" },
-    { icon: BiLogoNodejs, name: "Node.js", color: "text-green-500" },
+    { icon: BiLogoMongodb, name: "MongoDB", color: "text-green-500", bgColor: "bg-green-500/10" },
+    { icon: SiExpress, name: "Express.js", color: "text-white", bgColor: "bg-white/10" },
+    { icon: BiLogoReact, name: "React", color: "text-blue-400", bgColor: "bg-blue-400/10" },
+    { icon: BiLogoNodejs, name: "Node.js", color: "text-green-500", bgColor: "bg-green-500/10" },
 
     // Styling
-    { icon: BiLogoTailwindCss, name: "Tailwind CSS", color: "text-cyan-400" },
+    { icon: BiLogoTailwindCss, name: "Tailwind CSS", color: "text-cyan-400", bgColor: "bg-cyan-400/10" },
 
     // Core Languages
-    { icon: BiLogoTypescript, name: "TypeScript", color: "text-blue-500" },
+    { icon: BiLogoTypescript, name: "TypeScript", color: "text-blue-500", bgColor: "bg-blue-500/10" },
 
     // Additional Frameworks & Tools
-    { icon: SiNextdotjs, name: "Next.js", color: "text-gray-200" },
-    { icon: BiLogoGit, name: "Git", color: "text-orange-600" },
+    { icon: SiNextdotjs, name: "Next.js", color: "text-gray-200", bgColor: "bg-gray-200/10" },
+    { icon: BiLogoGit, name: "Git", color: "text-orange-600", bgColor: "bg-orange-500/10" },
   ];
 
   return (
     <div
       id="tech"
-      className="flex min-h-[70vh] w-full flex-col items-center justify-center gap-16 md:gap-32"
+      className="flex min-h-[80vh] w-full flex-col items-center justify-center gap-20 md:gap-32 py-20"
     >
       <div className="text-center">
         <motion.h1
@@ -44,7 +44,7 @@ const Tech = () => {
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl font-light text-white md:text-6xl"
+          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-4xl font-light md:text-6xl tracking-tight mb-4"
         >
           Technologies
         </motion.h1>
@@ -53,34 +53,60 @@ const Tech = () => {
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-4 text-lg text-gray-400"
+          className="mt-2 text-lg text-gray-300 max-w-[600px]"
         >
-          Here are the technologies I work with
+          These are the technologies I specialize in for creating modern, responsive web applications
         </motion.p>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-10 p-5">
-        {technologies.map((tech, index) => (
-          <motion.div
-            key={tech.name}
-            variants={variants}
-            initial="hidden"
-            whileInView="visible"
-            transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-            className="group relative"
-          >
-            <tech.icon
-              aria-label={tech.name}
-              className={`cursor-pointer text-[88px] ${tech.color} transition-all duration-300 hover:-translate-y-5 sm:text-[100px] md:text-[120px]`}
-            />
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
-              <span className="whitespace-nowrap rounded-md bg-gray-800 px-2 py-1 text-sm text-white">
+      <motion.div
+        className="relative w-full max-w-6xl mx-auto p-8"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Decorative elements */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-pink-500/5 rounded-xl border border-gray-800/30 backdrop-blur-sm"></div>
+
+        <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 md:gap-16 p-2">
+          {technologies.map((tech, index) => (
+            <motion.div
+              key={tech.name}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              whileHover={{ y: -15 }}
+              className="flex flex-col items-center justify-center group"
+            >
+              <motion.div
+                className={`relative flex items-center justify-center w-24 h-24 md:w-28 md:h-28 rounded-2xl p-5 ${tech.bgColor} border border-gray-800/50 shadow-lg`}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(113, 69, 227, 0.4)"
+                }}
+              >
+                <tech.icon className={`text-4xl md:text-5xl ${tech.color}`} />
+                <motion.div
+                  className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-500/30 to-pink-500/30 opacity-0 group-hover:opacity-100 blur-sm"
+                  transition={{ duration: 0.2 }}
+                />
+              </motion.div>
+              <motion.p
+                className={`mt-4 text-center font-medium ${tech.color}`}
+                initial={{ opacity: 0.7 }}
+                whileHover={{ opacity: 1, scale: 1.05 }}
+              >
                 {tech.name}
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+              </motion.p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };

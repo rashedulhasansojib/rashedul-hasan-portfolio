@@ -7,6 +7,7 @@ import {
   BsLinkedin,
   BsTwitterX,
   BsYoutube,
+  BsSend,
 } from "react-icons/bs";
 import { SOCIAL_LINKS } from "../constants/socials";
 
@@ -45,7 +46,7 @@ const Contact = () => {
       if (result.text === "OK") {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setStatus("idle"), 3000);
+        setTimeout(() => setStatus("idle"), 5000);
       } else {
         throw new Error("Failed to send message");
       }
@@ -60,201 +61,272 @@ const Contact = () => {
       setTimeout(() => {
         setStatus("idle");
         setErrorMessage("");
-      }, 3000);
+      }, 5000);
     }
-  };
-
-  const variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
   };
 
   return (
     <div
       id="contact"
-      className="flex min-h-screen w-full flex-col items-center justify-center gap-16 p-4 md:px-16"
+      className="flex min-h-screen w-full flex-col items-center justify-center gap-16 py-20 px-4 md:px-16 relative"
     >
-      <div className="text-center">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden -z-10 opacity-30">
+        <div className="absolute top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-[100px]"></div>
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-pink-500/20 rounded-full blur-[100px]"></div>
+      </div>
+
+      <div className="text-center max-w-2xl mx-auto">
         <motion.h1
-          variants={variants}
-          initial="hidden"
-          whileInView="visible"
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl font-light text-white md:text-6xl"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-4xl font-light md:text-6xl tracking-tight mb-4"
         >
           Get in Touch
         </motion.h1>
         <motion.p
-          variants={variants}
-          initial="hidden"
-          whileInView="visible"
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-4 text-lg text-gray-400"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mt-2 text-lg text-gray-300"
         >
-          Let's bring your ideas to life
+          Let's bring your ideas to life. Reach out and let's start a conversation!
         </motion.p>
       </div>
 
-      <div className="flex w-full max-w-4xl flex-col md:flex-row gap-16 items-center justify-between">
+      <div className="flex w-full max-w-6xl flex-col md:flex-row gap-16 items-stretch justify-between">
         {/* Contact Form */}
-        <motion.form
-          ref={formRef}
-          variants={variants}
-          initial="hidden"
-          whileInView="visible"
-          transition={{ duration: 0.5, delay: 0.4 }}
-          onSubmit={handleSubmit}
-          className="w-full max-w-md space-y-6"
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="w-full md:w-1/2 bg-black/20 backdrop-blur-sm border border-gray-800/50 p-8 rounded-2xl shadow-xl"
         >
-          <div className="space-y-4">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                required
-                className="w-full rounded-lg bg-black/20 backdrop-blur-sm border border-gray-800/50 p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              />
-            </motion.div>
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent mb-6">
+            Send a Message
+          </h2>
 
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                required
-                className="w-full rounded-lg bg-black/20 backdrop-blur-sm border border-gray-800/50 p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                required
-                rows={6}
-                className="w-full rounded-lg bg-black/20 backdrop-blur-sm border border-gray-800/50 p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              />
-            </motion.div>
-
-            {/* Hidden fields for email template */}
-            <input type="hidden" name="title" value="Contact Form Submission" />
-            <input
-              type="hidden"
-              name="to_email"
-              value="rashedulhasansojib@gmail.com"
-            />
-            <input type="hidden" name="to_name" value="Rashedul Hasan" />
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            type="submit"
-            disabled={status === "loading"}
-            className="w-full bg-gradient-to-r from-blue-500 to-pink-500 py-4 px-8 rounded-lg text-white font-medium transition-shadow duration-300 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
+          <motion.form
+            ref={formRef}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            onSubmit={handleSubmit}
+            className="space-y-6"
           >
-            {status === "loading" ? "Sending..." : "Send Message"}
-          </motion.button>
+            <div className="space-y-5">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="relative overflow-hidden rounded-lg"
+              >
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  required
+                  className="w-full rounded-lg bg-black/40 backdrop-blur-sm border border-gray-800/70 p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                />
+                <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-blue-500 to-pink-500 origin-left scale-x-0 transition-transform duration-300 group-focus-within:scale-x-100"></div>
+              </motion.div>
 
-          {status === "success" && (
-            <p className="text-green-500 text-center mt-4">
-              Message sent successfully!
-            </p>
-          )}
-          {status === "error" && (
-            <p className="text-red-500 text-center mt-4">{errorMessage}</p>
-          )}
-        </motion.form>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.6 }}
+                className="relative overflow-hidden rounded-lg"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  required
+                  className="w-full rounded-lg bg-black/40 backdrop-blur-sm border border-gray-800/70 p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.7 }}
+                className="relative overflow-hidden rounded-lg"
+              >
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  required
+                  rows={5}
+                  className="w-full rounded-lg bg-black/40 backdrop-blur-sm border border-gray-800/70 p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none"
+                />
+              </motion.div>
+
+              {/* Hidden fields for email template */}
+              <input type="hidden" name="title" value="Contact Form Submission" />
+              <input
+                type="hidden"
+                name="to_email"
+                value="rashedulhasansojib@gmail.com"
+              />
+              <input type="hidden" name="to_name" value="Rashedul Hasan" />
+            </div>
+
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              type="submit"
+              disabled={status === "loading"}
+              className="relative w-full bg-gradient-to-r from-blue-500 to-pink-500 py-4 px-8 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden group"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                {status === "loading" ? "Sending..." : "Send Message"}
+                <BsSend className="text-lg group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-pink-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={{ x: "100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.4 }}
+              />
+            </motion.button>
+
+            {/* Form status messages with animations */}
+            <div className="h-6 mt-4">
+              {status === "success" && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-green-500 text-center flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Message sent successfully!
+                </motion.p>
+              )}
+              {status === "error" && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-500 text-center flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  {errorMessage}
+                </motion.p>
+              )}
+            </div>
+          </motion.form>
+        </motion.div>
 
         {/* Contact Info */}
         <motion.div
-          variants={variants}
-          initial="hidden"
-          whileInView="visible"
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="w-full max-w-md text-center md:text-left"
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="w-full md:w-1/2 bg-black/20 backdrop-blur-sm border border-gray-800/50 p-8 rounded-2xl shadow-xl flex flex-col justify-between"
         >
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent mb-6">
-            Let's Connect
-          </h2>
-          <p className="text-gray-400 mb-8">
-            Feel free to reach out for collaborations or just a friendly chat.
-            I'm always open to discussing new projects or opportunities to be
-            part of your visions.
-          </p>
+          <div>
+            <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent mb-6">
+              Let's Connect
+            </h2>
+            <p className="text-gray-300 mb-8 leading-relaxed">
+              Feel free to reach out for collaborations or just a friendly chat.
+              I'm always open to discussing new projects or opportunities to be
+              part of your visions. Looking forward to hearing from you!
+            </p>
+          </div>
+
+          {/* Email and location info */}
+          <div className="space-y-4 mb-10">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-full bg-blue-500/10 border border-blue-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <a href="mailto:rashedulhasansojib@gmail.com" className="text-gray-300 hover:text-white transition-colors">
+                rashedulhasansojib@gmail.com
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-full bg-pink-500/10 border border-pink-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <span className="text-gray-300">
+                Dhaka, Bangladesh
+              </span>
+            </div>
+          </div>
 
           {/* Social Links */}
-          <div className="flex justify-center md:justify-start gap-6">
-            <motion.a
-              href={SOCIAL_LINKS.YOUTUBE}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, color: "#ff0000" }}
-              className="text-2xl text-white/70"
-            >
-              <BsYoutube />
-            </motion.a>
-            <motion.a
-              href={SOCIAL_LINKS.LINKEDIN}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, color: "#0077b5" }}
-              className="text-2xl text-white/70"
-            >
-              <BsLinkedin />
-            </motion.a>
-            <motion.a
-              href={SOCIAL_LINKS.GITHUB}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, color: "#f1502f" }}
-              className="text-2xl text-white/70"
-            >
-              <BsGithub />
-            </motion.a>
-            <motion.a
-              href={SOCIAL_LINKS.TWITTER}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, color: "#1da1f2" }}
-              className="text-2xl text-white/70"
-            >
-              <BsTwitterX />
-            </motion.a>
-            <motion.a
-              href={SOCIAL_LINKS.FACEBOOK}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, color: "#1877f2" }}
-              className="text-2xl text-white/70"
-            >
-              <BsFacebook />
-            </motion.a>
+          <div>
+            <h3 className="text-lg font-medium text-white mb-4">Find me on</h3>
+            <div className="flex gap-5">
+              <motion.a
+                href={SOCIAL_LINKS.YOUTUBE}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="p-3 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+              >
+                <BsYoutube className="text-xl" />
+              </motion.a>
+              <motion.a
+                href={SOCIAL_LINKS.LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="p-3 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+              >
+                <BsLinkedin className="text-xl" />
+              </motion.a>
+              <motion.a
+                href={SOCIAL_LINKS.GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="p-3 rounded-lg bg-orange-500/10 text-orange-400 hover:bg-orange-500/20 transition-colors"
+              >
+                <BsGithub className="text-xl" />
+              </motion.a>
+              <motion.a
+                href={SOCIAL_LINKS.TWITTER}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="p-3 rounded-lg bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-colors"
+              >
+                <BsTwitterX className="text-xl" />
+              </motion.a>
+              <motion.a
+                href={SOCIAL_LINKS.FACEBOOK}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="p-3 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+              >
+                <BsFacebook className="text-xl" />
+              </motion.a>
+            </div>
           </div>
         </motion.div>
       </div>

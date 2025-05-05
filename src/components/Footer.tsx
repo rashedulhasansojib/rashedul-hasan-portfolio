@@ -14,6 +14,14 @@ const Footer = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  const socialItems = [
+    { name: "YouTube", href: SOCIAL_LINKS.YOUTUBE, icon: BsYoutube, bgColor: "bg-red-500/10", textColor: "text-red-400", hoverBg: "hover:bg-red-500/20" },
+    { name: "LinkedIn", href: SOCIAL_LINKS.LINKEDIN, icon: BsLinkedin, bgColor: "bg-blue-500/10", textColor: "text-blue-400", hoverBg: "hover:bg-blue-500/20" },
+    { name: "GitHub", href: SOCIAL_LINKS.GITHUB, icon: BsGithub, bgColor: "bg-orange-500/10", textColor: "text-orange-400", hoverBg: "hover:bg-orange-500/20" },
+    { name: "Twitter", href: SOCIAL_LINKS.TWITTER, icon: BsTwitterX, bgColor: "bg-sky-500/10", textColor: "text-sky-400", hoverBg: "hover:bg-sky-500/20" },
+    { name: "Facebook", href: SOCIAL_LINKS.FACEBOOK, icon: BsFacebook, bgColor: "bg-blue-500/10", textColor: "text-blue-400", hoverBg: "hover:bg-blue-500/20" },
+  ];
+
   return (
     <footer className="w-full border-t border-gray-700 bg-black/70 backdrop-blur-md mt-32">
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
@@ -27,8 +35,8 @@ const Footer = () => {
             className="flex flex-col items-center md:items-start gap-4"
           >
             <a
-              href="#home"
-              className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent text-2xl font-semibold"
+              href="#hero"
+              className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-2xl font-semibold"
             >
               Rashedul
             </a>
@@ -48,7 +56,7 @@ const Footer = () => {
             <h3 className="text-white text-lg font-medium">Quick Links</h3>
             <div className="flex flex-col items-center md:items-start gap-2">
               <a
-                href="#home"
+                href="#hero"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 Home
@@ -90,51 +98,20 @@ const Footer = () => {
           >
             <h3 className="text-white text-lg font-medium">Connect</h3>
             <div className="flex gap-4">
-              <motion.a
-                href={SOCIAL_LINKS.YOUTUBE}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, color: "#ff0000" }}
-                className="text-gray-400 text-xl hover:text-white transition-colors"
-              >
-                <BsYoutube />
-              </motion.a>
-              <motion.a
-                href={SOCIAL_LINKS.LINKEDIN}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, color: "#0077b5" }}
-                className="text-gray-400 text-xl hover:text-white transition-colors"
-              >
-                <BsLinkedin />
-              </motion.a>
-              <motion.a
-                href={SOCIAL_LINKS.GITHUB}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, color: "#f1502f" }}
-                className="text-gray-400 text-xl hover:text-white transition-colors"
-              >
-                <BsGithub />
-              </motion.a>
-              <motion.a
-                href={SOCIAL_LINKS.TWITTER}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, color: "#1da1f2" }}
-                className="text-gray-400 text-xl hover:text-white transition-colors"
-              >
-                <BsTwitterX />
-              </motion.a>
-              <motion.a
-                href={SOCIAL_LINKS.FACEBOOK}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, color: "#1877f2" }}
-                className="text-gray-400 text-xl hover:text-white transition-colors"
-              >
-                <BsFacebook />
-              </motion.a>
+              {socialItems.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.name}
+                  className={`p-2 rounded-lg ${item.bgColor} ${item.textColor} ${item.hoverBg} transition-colors`}
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <item.icon className="text-base" />
+                </motion.a>
+              ))}
             </div>
           </motion.div>
         </div>
