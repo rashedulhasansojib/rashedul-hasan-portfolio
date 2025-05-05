@@ -2,4 +2,19 @@
 
 * {
   font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.9);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgb(0, 62, 196), rgb(184, 0, 153));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to top, rgb(0, 62, 196), rgb(184, 0, 153));
 }
