@@ -54,12 +54,16 @@ const AppContent = ({ loading, onLoadingComplete }: { loading: boolean, onLoadin
           <>
             {/* Dark mode gradient background */}
             {isDark && (
-              <div className="fixed -z-10 min-h-screen w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#7145E3_100%)]"></div>
+              <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
             )}
 
             {/* Light mode background */}
             {!isDark && (
-              <div className="fixed -z-10 min-h-screen w-full bg-slate-50"></div>
+              <div className="absolute top-0 -z-10 h-full w-full bg-gradient-to-br from-white via-blue-50 to-indigo-50">
+                <div className="absolute bottom-auto left-auto right-0 top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-40 blur-[80px]"></div>
+                <div className="absolute top-1/2 left-20 h-[300px] w-[300px] -translate-y-[30%] rounded-full bg-[rgba(120,180,255,0.4)] opacity-40 blur-[80px]"></div>
+                <div className="absolute bottom-20 right-32 h-[250px] w-[250px] rounded-full bg-[rgba(255,130,180,0.3)] opacity-30 blur-[80px]"></div>
+              </div>
             )}
 
             {/* Background orbs */}

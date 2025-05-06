@@ -94,9 +94,9 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
       {/* Card content */}
       <div className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-16 p-5 md:p-6 ${isDark
-          ? 'bg-black/60'
-          : 'bg-white/70'
-        } backdrop-blur-md rounded-xl overflow-hidden z-10`}>
+        ? 'bg-black/60'
+        : 'bg-gradient-to-br from-white/80 to-white/40'
+        } ${isDark ? 'backdrop-blur-md' : 'backdrop-blur-2xl'} ${isDark ? '' : 'border-2 border-white/70'} rounded-xl overflow-hidden z-10 ${isDark ? '' : 'shadow-[0_10px_50px_-12px_rgba(100,150,255,0.4)]'}`}>
         {/* Project image */}
         <motion.div
           className="w-full md:w-2/5 flex-shrink-0 mb-6 md:mb-0"
@@ -191,8 +191,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               target="_blank"
               rel="noopener noreferrer"
               className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full ${isDark
-                  ? 'bg-black/30 border-gray-700'
-                  : 'bg-gray-100/70 border-gray-300'
+                ? 'bg-black/30 border-gray-700'
+                : 'bg-gray-100/70 border-gray-300'
                 } backdrop-blur-sm border hover:border-blue-500/50 ${isDark ? 'text-white' : 'text-gray-800'
                 } text-sm md:text-base font-medium`}
               whileHover={{ scale: 1.05 }}

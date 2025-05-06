@@ -59,9 +59,9 @@ const About = () => {
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.4 }}
           className={`flex flex-col gap-6 lg:w-1/2 ${isDark
-              ? 'bg-black/20 border-gray-800/50'
-              : 'bg-white/40 border-gray-300'
-            } backdrop-blur-sm border p-8 rounded-2xl shadow-xl`}
+            ? 'bg-black/20 border-gray-800/50'
+            : 'bg-gradient-to-br from-white/80 to-white/40'
+            } ${isDark ? 'backdrop-blur-sm' : 'backdrop-blur-2xl'} ${isDark ? 'border' : 'border-2 border-white/70'} p-8 rounded-2xl ${isDark ? 'shadow-xl' : 'shadow-[0_20px_50px_-12px_rgba(120,130,255,0.3)]'}`}
         >
           <div className="space-y-5">
             <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent">
@@ -122,20 +122,20 @@ const About = () => {
 
               {/* Skill content */}
               <div className={`relative ${isDark
-                  ? 'bg-black/60 border-gray-800/50'
-                  : 'bg-white/70 border-gray-300'
-                } backdrop-blur-md rounded-xl p-4 flex flex-col items-center justify-center border h-full`}
+                ? 'bg-black/60 border-gray-800/50'
+                : 'bg-gradient-to-br from-white/80 to-white/40 border-white/70 border-2'
+                } ${isDark ? 'backdrop-blur-md' : 'backdrop-blur-2xl'} rounded-xl p-4 flex flex-col items-center justify-center ${isDark ? 'border' : ''} h-full ${isDark ? '' : 'shadow-[0_10px_30px_-12px_rgba(120,130,255,0.25)]'}`}
               >
                 <p className={`${isDark ? 'text-gray-200' : 'text-gray-900'} text-center font-medium`}>{skill.name}</p>
                 <span className={`text-xs font-medium mt-1 px-2 py-0.5 rounded-full ${skill.color === 'from-blue-400 to-blue-600' ? `${isDark ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-500/30 text-blue-800'}` :
-                    skill.color === 'from-green-400 to-green-600' ? `${isDark ? 'bg-green-500/20 text-green-300' : 'bg-green-500/30 text-green-800'}` :
-                      skill.color === 'from-yellow-400 to-orange-600' ? `${isDark ? 'bg-orange-500/20 text-orange-300' : 'bg-orange-500/30 text-orange-800'}` :
-                        skill.color === 'from-pink-400 to-purple-600' ? `${isDark ? 'bg-pink-500/20 text-pink-300' : 'bg-pink-500/30 text-pink-800'}` :
-                          skill.color === 'from-cyan-400 to-blue-500' ? `${isDark ? 'bg-cyan-500/20 text-cyan-300' : 'bg-cyan-500/30 text-cyan-800'}` :
-                            skill.color === 'from-indigo-400 to-indigo-600' ? `${isDark ? 'bg-indigo-500/20 text-indigo-300' : 'bg-indigo-500/30 text-indigo-800'}` :
-                              skill.color === 'from-blue-500 to-indigo-600' ? `${isDark ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-500/30 text-blue-800'}` :
-                                skill.color === 'from-cyan-500 to-blue-600' ? `${isDark ? 'bg-cyan-500/20 text-cyan-300' : 'bg-cyan-500/30 text-cyan-800'}` :
-                                  `${isDark ? 'bg-gray-500/20 text-gray-300' : 'bg-gray-500/30 text-gray-800'}`
+                  skill.color === 'from-green-400 to-green-600' ? `${isDark ? 'bg-green-500/20 text-green-300' : 'bg-green-500/30 text-green-800'}` :
+                    skill.color === 'from-yellow-400 to-orange-600' ? `${isDark ? 'bg-orange-500/20 text-orange-300' : 'bg-orange-500/30 text-orange-800'}` :
+                      skill.color === 'from-pink-400 to-purple-600' ? `${isDark ? 'bg-pink-500/20 text-pink-300' : 'bg-pink-500/30 text-pink-800'}` :
+                        skill.color === 'from-cyan-400 to-blue-500' ? `${isDark ? 'bg-cyan-500/20 text-cyan-300' : 'bg-cyan-500/30 text-cyan-800'}` :
+                          skill.color === 'from-indigo-400 to-indigo-600' ? `${isDark ? 'bg-indigo-500/20 text-indigo-300' : 'bg-indigo-500/30 text-indigo-800'}` :
+                            skill.color === 'from-blue-500 to-indigo-600' ? `${isDark ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-500/30 text-blue-800'}` :
+                              skill.color === 'from-cyan-500 to-blue-600' ? `${isDark ? 'bg-cyan-500/20 text-cyan-300' : 'bg-cyan-500/30 text-cyan-800'}` :
+                                `${isDark ? 'bg-gray-500/20 text-gray-300' : 'bg-gray-500/30 text-gray-800'}`
                   }`}
                 >
                   {skill.level}

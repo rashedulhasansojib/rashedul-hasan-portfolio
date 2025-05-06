@@ -13,7 +13,7 @@ import { useTheme } from "../context/ThemeContext";
 const Tech = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  
+
   const variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
@@ -21,36 +21,52 @@ const Tech = () => {
 
   const technologies = [
     // MERN Stack
-    { icon: BiLogoMongodb, name: "MongoDB", 
+    {
+      icon: BiLogoMongodb, name: "MongoDB",
       darkColor: "text-green-500", darkBg: "bg-green-500/10",
-      lightColor: "text-green-700", lightBg: "bg-green-500/20" },
-    { icon: SiExpress, name: "Express.js", 
+      lightColor: "text-green-700", lightBg: "bg-green-500/20"
+    },
+    {
+      icon: SiExpress, name: "Express.js",
       darkColor: "text-white", darkBg: "bg-white/10",
-      lightColor: "text-gray-800", lightBg: "bg-gray-400/20" },
-    { icon: BiLogoReact, name: "React", 
+      lightColor: "text-gray-800", lightBg: "bg-gray-400/20"
+    },
+    {
+      icon: BiLogoReact, name: "React",
       darkColor: "text-blue-400", darkBg: "bg-blue-400/10",
-      lightColor: "text-blue-600", lightBg: "bg-blue-400/20" },
-    { icon: BiLogoNodejs, name: "Node.js", 
+      lightColor: "text-blue-600", lightBg: "bg-blue-400/20"
+    },
+    {
+      icon: BiLogoNodejs, name: "Node.js",
       darkColor: "text-green-500", darkBg: "bg-green-500/10",
-      lightColor: "text-green-700", lightBg: "bg-green-500/20" },
+      lightColor: "text-green-700", lightBg: "bg-green-500/20"
+    },
 
     // Styling
-    { icon: BiLogoTailwindCss, name: "Tailwind CSS", 
+    {
+      icon: BiLogoTailwindCss, name: "Tailwind CSS",
       darkColor: "text-cyan-400", darkBg: "bg-cyan-400/10",
-      lightColor: "text-cyan-600", lightBg: "bg-cyan-400/20" },
+      lightColor: "text-cyan-600", lightBg: "bg-cyan-400/20"
+    },
 
     // Core Languages
-    { icon: BiLogoTypescript, name: "TypeScript", 
+    {
+      icon: BiLogoTypescript, name: "TypeScript",
       darkColor: "text-blue-500", darkBg: "bg-blue-500/10",
-      lightColor: "text-blue-700", lightBg: "bg-blue-500/20" },
+      lightColor: "text-blue-700", lightBg: "bg-blue-500/20"
+    },
 
     // Additional Frameworks & Tools
-    { icon: SiNextdotjs, name: "Next.js", 
+    {
+      icon: SiNextdotjs, name: "Next.js",
       darkColor: "text-gray-200", darkBg: "bg-gray-200/10",
-      lightColor: "text-gray-800", lightBg: "bg-gray-400/20" },
-    { icon: BiLogoGit, name: "Git", 
+      lightColor: "text-gray-800", lightBg: "bg-gray-400/20"
+    },
+    {
+      icon: BiLogoGit, name: "Git",
       darkColor: "text-orange-600", darkBg: "bg-orange-500/10",
-      lightColor: "text-orange-700", lightBg: "bg-orange-500/20" },
+      lightColor: "text-orange-700", lightBg: "bg-orange-500/20"
+    },
   ];
 
   return (
@@ -92,8 +108,8 @@ const Tech = () => {
         <div className={`${
           isDark 
             ? 'bg-black/20 border-gray-800/50' 
-            : 'bg-white/50 border-gray-300'
-          } backdrop-blur-sm border p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl`}
+            : 'bg-gradient-to-br from-white/80 to-white/40'
+          } ${isDark ? 'backdrop-blur-sm' : 'backdrop-blur-2xl'} ${isDark ? 'border' : 'border-2 border-white/70'} p-5 sm:p-6 md:p-8 rounded-2xl ${isDark ? 'shadow-xl' : 'shadow-[0_20px_50px_-12px_rgba(120,130,255,0.3)]'}`}
         >
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8 lg:gap-12">
             {technologies.map((tech, index) => (
@@ -112,10 +128,10 @@ const Tech = () => {
               >
                 <motion.div
                   className={`relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl p-4 sm:p-5 ${
-                    isDark ? tech.darkBg : tech.lightBg
-                  } border ${
-                    isDark ? 'border-gray-800/50' : 'border-gray-300'
-                  } shadow-lg`}
+                    isDark ? tech.darkBg : `${tech.lightBg} bg-gradient-to-br from-white/80 to-white/30`
+                  } ${
+                    isDark ? 'border border-gray-800/50' : 'border-2 border-white/70'
+                  } ${isDark ? '' : 'backdrop-blur-2xl'} ${isDark ? 'shadow-lg' : 'shadow-[0_15px_30px_-8px_rgba(100,130,255,0.25)]'}`}
                   whileHover={{
                     scale: 1.05,
                     boxShadow: "0 0 20px rgba(113, 69, 227, 0.4)"

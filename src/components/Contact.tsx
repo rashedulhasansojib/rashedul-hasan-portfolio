@@ -8,6 +8,8 @@ import {
   BsTwitterX,
   BsYoutube,
   BsSend,
+  BsEnvelopeFill,
+  BsGeoAltFill,
 } from "react-icons/bs";
 import { SOCIAL_LINKS } from "../constants/socials";
 import { useTheme } from "../context/ThemeContext";
@@ -103,9 +105,9 @@ const Contact = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className={`w-full md:w-1/2 ${isDark
-              ? 'bg-black/20 border-gray-800/50'
-              : 'bg-white/40 border-gray-300'
-            } backdrop-blur-sm border p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl`}
+            ? 'bg-black/20 border-gray-800/50'
+            : 'bg-gradient-to-br from-white/80 to-white/40'
+            } ${isDark ? 'backdrop-blur-sm' : 'backdrop-blur-2xl'} ${isDark ? 'border' : 'border-2 border-white/70'} p-5 sm:p-6 md:p-8 rounded-2xl ${isDark ? 'shadow-xl' : 'shadow-[0_20px_50px_-12px_rgba(120,130,255,0.3)]'}`}
         >
           <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent mb-4 md:mb-6">
             Send a Message
@@ -136,9 +138,9 @@ const Contact = () => {
                   }
                   required
                   className={`w-full rounded-lg ${isDark
-                      ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
-                      : 'bg-white/70 border-gray-300 text-gray-800 placeholder-gray-500'
-                    } backdrop-blur-sm border p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base`}
+                    ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
+                    : 'bg-gradient-to-br from-white/80 to-white/30 border-white/70 text-gray-800 placeholder-gray-500'
+                    } ${isDark ? 'backdrop-blur-sm border' : 'backdrop-blur-2xl border-2'} p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base shadow-[0_8px_30px_-12px_rgba(120,130,255,0.2)]`}
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-blue-500 to-pink-500 origin-left scale-x-0 transition-transform duration-300 group-focus-within:scale-x-100"></div>
               </motion.div>
@@ -159,9 +161,9 @@ const Contact = () => {
                   }
                   required
                   className={`w-full rounded-lg ${isDark
-                      ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
-                      : 'bg-white/70 border-gray-300 text-gray-800 placeholder-gray-500'
-                    } backdrop-blur-sm border p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base`}
+                    ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
+                    : 'bg-gradient-to-br from-white/80 to-white/30 border-white/70 text-gray-800 placeholder-gray-500'
+                    } ${isDark ? 'backdrop-blur-sm border' : 'backdrop-blur-2xl border-2'} p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base shadow-[0_8px_30px_-12px_rgba(120,130,255,0.2)]`}
                 />
               </motion.div>
 
@@ -181,9 +183,9 @@ const Contact = () => {
                   required
                   rows={4}
                   className={`w-full rounded-lg ${isDark
-                      ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
-                      : 'bg-white/70 border-gray-300 text-gray-800 placeholder-gray-500'
-                    } backdrop-blur-sm border p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none text-sm md:text-base`}
+                    ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
+                    : 'bg-gradient-to-br from-white/80 to-white/30 border-white/70 text-gray-800 placeholder-gray-500'
+                    } ${isDark ? 'backdrop-blur-sm border' : 'backdrop-blur-2xl border-2'} p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none text-sm md:text-base shadow-[0_8px_30px_-12px_rgba(120,130,255,0.2)]`}
                 />
               </motion.div>
 
@@ -245,9 +247,9 @@ const Contact = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className={`w-full md:w-1/2 ${isDark
-              ? 'bg-black/20 border-gray-800/50'
-              : 'bg-white/40 border-gray-300'
-            } backdrop-blur-sm border p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl flex flex-col justify-between gap-8`}
+            ? 'bg-black/20 border-gray-800/50'
+            : 'bg-gradient-to-br from-white/80 to-white/40'
+            } ${isDark ? 'backdrop-blur-sm' : 'backdrop-blur-2xl'} ${isDark ? 'border' : 'border-2 border-white/70'} p-5 sm:p-6 md:p-8 rounded-2xl ${isDark ? 'shadow-xl' : 'shadow-[0_20px_50px_-12px_rgba(120,130,255,0.3)]'} flex flex-col justify-between gap-8`}
         >
           <div>
             <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent mb-4 md:mb-6">
@@ -259,9 +261,9 @@ const Contact = () => {
 
             <ul className="space-y-3 md:space-y-5">
               <li className="flex items-center gap-3">
-                <span className={`${isDark ? 'text-blue-400' : 'text-blue-600'} text-base md:text-lg font-medium`}>
-                  Email:
-                </span>
+                <div className={`p-2 rounded-lg ${isDark ? 'bg-blue-500/20' : 'bg-blue-500/30'} ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+                  <BsEnvelopeFill className="text-base md:text-lg" />
+                </div>
                 <a
                   href="mailto:rashedulhasansojib@gmail.com"
                   className={`${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} transition-colors duration-300 text-sm md:text-base`}
@@ -270,9 +272,9 @@ const Contact = () => {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className={`${isDark ? 'text-blue-400' : 'text-blue-600'} text-base md:text-lg font-medium`}>
-                  Location:
-                </span>
+                <div className={`p-2 rounded-lg ${isDark ? 'bg-green-500/20' : 'bg-green-500/30'} ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+                  <BsGeoAltFill className="text-base md:text-lg" />
+                </div>
                 <span className={`${isDark ? 'text-gray-300' : 'text-gray-700'} text-sm md:text-base`}>
                   Dhaka, Bangladesh
                 </span>
