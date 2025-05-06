@@ -116,6 +116,21 @@ const Footer = () => {
           </motion.div>
         </div>
 
+        {/* Credits Section */}
+        <motion.div
+          variants={variants}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-10 pt-6 border-t border-gray-800 text-center"
+        >
+          <p className="text-gray-400 text-sm leading-relaxed max-w-2xl mx-auto">
+            Loosely designed in Figma and coded in Visual Studio Code by yours truly.
+            Built with React, TypeScript, and Tailwind CSS, deployed with Vercel.
+            All text is set in the Poppins typeface.
+          </p>
+        </motion.div>
+
         {/* Copyright */}
         <motion.div
           variants={variants}

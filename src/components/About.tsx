@@ -8,14 +8,14 @@ const About = () => {
   };
 
   const skills = [
-    { name: "Frontend Development", color: "from-blue-400 to-blue-600" },
-    { name: "Backend Development", color: "from-green-400 to-green-600" },
-    { name: "Responsive Design", color: "from-orange-400 to-pink-500" },
-    { name: "UI/UX Design", color: "from-pink-400 to-purple-600" },
-    { name: "Database Management", color: "from-cyan-400 to-blue-500" },
-    { name: "API Development", color: "from-yellow-400 to-orange-600" },
-    { name: "Version Control", color: "from-indigo-400 to-indigo-600" },
-    { name: "Testing & Debugging", color: "from-red-400 to-red-600" },
+    { name: "React & Next.js", color: "from-blue-400 to-blue-600", level: "Expert" },
+    { name: "Node.js & Express", color: "from-green-400 to-green-600", level: "Advanced" },
+    { name: "MongoDB & PostgreSQL", color: "from-cyan-400 to-blue-500", level: "Advanced" },
+    { name: "RESTful API Design", color: "from-yellow-400 to-orange-600", level: "Expert" },
+    { name: "TypeScript", color: "from-blue-500 to-indigo-600", level: "Advanced" },
+    { name: "TailwindCSS", color: "from-cyan-500 to-blue-600", level: "Expert" },
+    { name: "Git & CI/CD", color: "from-indigo-400 to-indigo-600", level: "Advanced" },
+    { name: "UI/UX Design", color: "from-pink-400 to-purple-600", level: "Intermediate" },
   ];
 
   return (
@@ -46,7 +46,7 @@ const About = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-2 text-lg text-gray-300"
         >
-          Get to know me better
+          A glimpse into who I am and what I do
         </motion.p>
       </div>
 
@@ -61,21 +61,13 @@ const About = () => {
         >
           <div className="space-y-5">
             <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent">
-              Who I Am
+              My Approach
             </h2>
             <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-              I'm a passionate Full Stack Web Developer with expertise in modern
-              web technologies. With a strong foundation in both frontend and
-              backend development, I specialize in creating responsive and
-              user-friendly web applications that deliver exceptional user
-              experiences.
+              I'm a developer passionate about crafting digital experiences that blend thoughtful design with robust engineering. My work lies at the intersection of aesthetics and functionality, creating interfaces that are both beautiful and meticulously built for performance.
             </p>
             <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-              My journey in web development started with a curiosity for
-              creating interactive websites, and has evolved into a professional
-              career where I continuously learn and adapt to new technologies. I
-              believe in writing clean, maintainable code and following best
-              practices to build scalable applications.
+              Specializing in the MERN stack, I build scalable applications with clean architecture and responsive design. I prioritize accessibility and user experience in everything I create, ensuring that my projects are inclusive and intuitive for all users.
             </p>
           </div>
 
@@ -125,8 +117,20 @@ const About = () => {
               />
 
               {/* Skill content */}
-              <div className="relative bg-black/60 backdrop-blur-md rounded-xl p-4 flex items-center justify-center border border-gray-800/50 h-full">
+              <div className="relative bg-black/60 backdrop-blur-md rounded-xl p-4 flex flex-col items-center justify-center border border-gray-800/50 h-full">
                 <p className="text-gray-200 text-center font-medium">{skill.name}</p>
+                <span className={`text-xs font-medium mt-1 px-2 py-0.5 rounded-full ${skill.color === 'from-blue-400 to-blue-600' ? 'bg-blue-500/20 text-blue-300' :
+                  skill.color === 'from-green-400 to-green-600' ? 'bg-green-500/20 text-green-300' :
+                    skill.color === 'from-yellow-400 to-orange-600' ? 'bg-orange-500/20 text-orange-300' :
+                      skill.color === 'from-pink-400 to-purple-600' ? 'bg-pink-500/20 text-pink-300' :
+                        skill.color === 'from-cyan-400 to-blue-500' ? 'bg-cyan-500/20 text-cyan-300' :
+                          skill.color === 'from-indigo-400 to-indigo-600' ? 'bg-indigo-500/20 text-indigo-300' :
+                            skill.color === 'from-blue-500 to-indigo-600' ? 'bg-blue-500/20 text-blue-300' :
+                              skill.color === 'from-cyan-500 to-blue-600' ? 'bg-cyan-500/20 text-cyan-300' :
+                                'bg-gray-500/20 text-gray-300'}`}
+                >
+                  {skill.level}
+                </span>
 
                 {/* Hover effect */}
                 <motion.div

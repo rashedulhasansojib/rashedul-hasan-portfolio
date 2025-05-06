@@ -58,10 +58,10 @@ const Hero = () => {
               Rashedul Hasan
             </h1>
             <h2 className="bg-gradient-to-r from-pink-400 to-blue-500 bg-clip-text text-transparent text-lg md:text-xl lg:text-2xl font-medium">
-              Full Stack Web Developer
+              Full Stack Engineer
             </h2>
             <p className="text-sm md:text-base text-pretty text-gray-300 leading-relaxed max-w-[500px] mb-1">
-              I am a passionate web developer specializing in creating dynamic and responsive web applications. I love to learn new technologies and improve my skills.
+              I build pixel-perfect, accessible web applications with modern technologies that deliver exceptional user experiences.
             </p>
             <div className="flex gap-4 flex-wrap justify-center mt-3">
               <motion.a
