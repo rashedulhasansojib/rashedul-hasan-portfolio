@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import { HiArrowRight } from "react-icons/hi";
-import { useTransition } from "../context/TransitionContext";
 
 const About = () => {
-  const { currentSection } = useTransition();
-
   const variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },

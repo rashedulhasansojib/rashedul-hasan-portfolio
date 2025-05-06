@@ -26,7 +26,6 @@ const SectionTransition = ({ children, sectionId, className = '' }: SectionTrans
             if (rect.top < viewHeight / 2 && rect.bottom > viewHeight / 2) {
                 if (currentSection !== sectionId) {
                     setCurrentSection(sectionId);
-                    console.log("Section in view:", sectionId);
                 }
             }
         };

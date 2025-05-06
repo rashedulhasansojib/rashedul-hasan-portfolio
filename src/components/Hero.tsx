@@ -1,13 +1,11 @@
 import image from "../assets/hero.png";
 import { motion, useReducedMotion } from "framer-motion";
 import { HiDownload, HiChevronDown } from "react-icons/hi";
-import { useTransition } from "../context/TransitionContext";
 
 const Hero = () => {
-  const shouldReduceMotion = useReducedMotion();
-  const { currentSection } = useTransition();
+  const prefersReducedMotion = useReducedMotion();
 
-  const animationProps = shouldReduceMotion
+  const animationProps = prefersReducedMotion
     ? {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
@@ -22,8 +20,8 @@ const Hero = () => {
         <div className="flex flex-col items-center justify-center gap-6 md:gap-8 text-white max-w-5xl mx-auto">
           <motion.div
             {...animationProps}
-            initial={!shouldReduceMotion ? { opacity: 0, y: -50 } : undefined}
-            animate={!shouldReduceMotion ? { opacity: 1, y: 0 } : undefined}
+            initial={!prefersReducedMotion ? { opacity: 0, y: -50 } : undefined}
+            animate={!prefersReducedMotion ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
@@ -47,8 +45,8 @@ const Hero = () => {
 
           <motion.div
             {...animationProps}
-            initial={!shouldReduceMotion ? { opacity: 0, y: 50 } : undefined}
-            animate={!shouldReduceMotion ? { opacity: 1, y: 0 } : undefined}
+            initial={!prefersReducedMotion ? { opacity: 0, y: 50 } : undefined}
+            animate={!prefersReducedMotion ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col items-center justify-center gap-3 md:gap-4 text-center max-w-[600px]"
           >

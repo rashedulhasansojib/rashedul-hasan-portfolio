@@ -8,11 +8,8 @@ import {
 } from "react-icons/bi";
 import { SiExpress, SiNextdotjs } from "react-icons/si";
 import { motion } from "framer-motion";
-import { useTransition } from "../context/TransitionContext";
 
 const Tech = () => {
-  const { currentSection } = useTransition();
-
   const variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },

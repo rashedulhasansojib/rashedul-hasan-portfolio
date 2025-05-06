@@ -5,7 +5,6 @@ import img4 from "../assets/4.png";
 import img5 from "../assets/5.png";
 
 import { motion } from "framer-motion";
-import { useTransition } from "../context/TransitionContext";
 import { useEffect } from "react";
 
 interface Project {
@@ -196,14 +195,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 };
 
 const Projects = () => {
-  const { currentSection } = useTransition();
-
+  // Keep the repaint logic to fix visibility issues, but remove console logs
   useEffect(() => {
-    console.log("Projects component rendered", currentSection);
-  }, [currentSection]);
-
-  useEffect(() => {
-    console.log("Projects component mounted");
     // Force a repaint/reflow to help with visibility issues
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {

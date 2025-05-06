@@ -10,10 +10,8 @@ import {
   BsSend,
 } from "react-icons/bs";
 import { SOCIAL_LINKS } from "../constants/socials";
-import { useTransition } from "../context/TransitionContext";
 
 const Contact = () => {
-  const { currentSection } = useTransition();
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: "",
