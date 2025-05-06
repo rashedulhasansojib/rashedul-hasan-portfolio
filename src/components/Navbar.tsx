@@ -7,7 +7,7 @@ import {
   BsList,
   BsX,
   BsSun,
-  BsMoon
+  BsMoon,
 } from "react-icons/bs";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,7 +22,7 @@ const Navbar = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { currentSection, setIsTransitioning } = useTransition();
   const { theme, toggleTheme } = useTheme();
-  const isDark = theme === 'dark';
+  const isDark = theme === "dark";
 
   useEffect(() => {
     if (currentSection) {
@@ -33,9 +33,9 @@ const Navbar = () => {
   // Toggle body class when menu is open/closed
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.classList.add('menu-open');
+      document.body.classList.add("menu-open");
     } else {
-      document.body.classList.remove('menu-open');
+      document.body.classList.remove("menu-open");
     }
   }, [isMenuOpen]);
 
@@ -45,13 +45,13 @@ const Navbar = () => {
       const links = document.querySelectorAll('a[href^="#"]');
       const handleLinkClick = () => setIsMenuOpen(false);
 
-      links.forEach(link => {
-        link.addEventListener('click', handleLinkClick);
+      links.forEach((link) => {
+        link.addEventListener("click", handleLinkClick);
       });
 
       return () => {
-        links.forEach(link => {
-          link.removeEventListener('click', handleLinkClick);
+        links.forEach((link) => {
+          link.removeEventListener("click", handleLinkClick);
         });
       };
     }
@@ -82,20 +82,20 @@ const Navbar = () => {
   // Handle ESC key to close menu
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isMenuOpen) {
+      if (event.key === "Escape" && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
 
-    document.addEventListener('keydown', handleEscKey);
+    document.addEventListener("keydown", handleEscKey);
     return () => {
-      document.removeEventListener('keydown', handleEscKey);
+      document.removeEventListener("keydown", handleEscKey);
     };
   }, [isMenuOpen]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleNavClick = (sectionId: string) => {
+  const handleNavClick = (_: string) => {
     setIsTransitioning(true);
     setIsMenuOpen(false);
 
@@ -114,16 +114,55 @@ const Navbar = () => {
   ];
 
   const socialItems = [
-    { name: "YouTube", href: SOCIAL_LINKS.YOUTUBE, icon: BsYoutube, bgColor: "bg-red-500/10", textColor: "text-red-400", hoverBg: "hover:bg-red-500/20" },
-    { name: "LinkedIn", href: SOCIAL_LINKS.LINKEDIN, icon: BsLinkedin, bgColor: "bg-blue-500/10", textColor: "text-blue-400", hoverBg: "hover:bg-blue-500/20" },
-    { name: "GitHub", href: SOCIAL_LINKS.GITHUB, icon: BsGithub, bgColor: "bg-orange-500/10", textColor: "text-orange-400", hoverBg: "hover:bg-orange-500/20" },
-    { name: "Twitter", href: SOCIAL_LINKS.TWITTER, icon: BsTwitterX, bgColor: "bg-sky-500/10", textColor: "text-sky-400", hoverBg: "hover:bg-sky-500/20" },
-    { name: "Facebook", href: SOCIAL_LINKS.FACEBOOK, icon: BsFacebook, bgColor: "bg-blue-500/10", textColor: "text-blue-400", hoverBg: "hover:bg-blue-500/20" },
+    {
+      name: "YouTube",
+      href: SOCIAL_LINKS.YOUTUBE,
+      icon: BsYoutube,
+      bgColor: "bg-red-500/10",
+      textColor: "text-red-400",
+      hoverBg: "hover:bg-red-500/20",
+    },
+    {
+      name: "LinkedIn",
+      href: SOCIAL_LINKS.LINKEDIN,
+      icon: BsLinkedin,
+      bgColor: "bg-blue-500/10",
+      textColor: "text-blue-400",
+      hoverBg: "hover:bg-blue-500/20",
+    },
+    {
+      name: "GitHub",
+      href: SOCIAL_LINKS.GITHUB,
+      icon: BsGithub,
+      bgColor: "bg-orange-500/10",
+      textColor: "text-orange-400",
+      hoverBg: "hover:bg-orange-500/20",
+    },
+    {
+      name: "Twitter",
+      href: SOCIAL_LINKS.TWITTER,
+      icon: BsTwitterX,
+      bgColor: "bg-sky-500/10",
+      textColor: "text-sky-400",
+      hoverBg: "hover:bg-sky-500/20",
+    },
+    {
+      name: "Facebook",
+      href: SOCIAL_LINKS.FACEBOOK,
+      icon: BsFacebook,
+      bgColor: "bg-blue-500/10",
+      textColor: "text-blue-400",
+      hoverBg: "hover:bg-blue-500/20",
+    },
   ];
 
   return (
     <motion.nav
-      className={`fixed top-0 z-50 w-full border-b ${isDark ? 'border-gray-800/70 bg-black/80' : 'border-gray-300 bg-white/90'} backdrop-blur-md py-4 md:py-5 px-4 md:px-8 lg:px-16`}
+      className={`fixed top-0 z-50 w-full border-b ${
+        isDark
+          ? "border-gray-800/70 bg-black/80"
+          : "border-gray-300 bg-white/90"
+      } backdrop-blur-md py-4 md:py-5 px-4 md:px-8 lg:px-16`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -134,7 +173,7 @@ const Navbar = () => {
           className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent text-2xl md:text-3xl font-semibold transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => handleNavClick('hero')}
+          onClick={() => handleNavClick("hero")}
         >
           Rashedul
         </motion.a>
@@ -146,10 +185,15 @@ const Navbar = () => {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className={`relative px-2 py-1 text-base font-medium transition-all duration-300 ${activeSection === item.href.substring(1)
-                    ? isDark ? "text-white" : "text-gray-900"
-                    : isDark ? "text-gray-400 hover:text-white" : "text-gray-700 hover:text-gray-900"
-                    }`}
+                  className={`relative px-2 py-1 text-base font-medium transition-all duration-300 ${
+                    activeSection === item.href.substring(1)
+                      ? isDark
+                        ? "text-white"
+                        : "text-gray-900"
+                      : isDark
+                      ? "text-gray-400 hover:text-white"
+                      : "text-gray-700 hover:text-gray-900"
+                  }`}
                   onClick={() => handleNavClick(item.href.substring(1))}
                 >
                   {item.name}
@@ -171,12 +215,20 @@ const Navbar = () => {
           {/* Theme Toggle Button */}
           <motion.button
             onClick={toggleTheme}
-            className={`p-2 rounded-lg ${isDark ? 'bg-blue-500/10 text-blue-400 hover:bg-blue-500/20' : 'bg-blue-500/20 text-blue-600 hover:bg-blue-500/30'} transition-colors mr-2`}
+            className={`p-2 rounded-lg ${
+              isDark
+                ? "bg-blue-500/10 text-blue-400 hover:bg-blue-500/20"
+                : "bg-blue-500/20 text-blue-600 hover:bg-blue-500/30"
+            } transition-colors mr-2`}
             whileHover={{ scale: 1.1, y: -3 }}
             whileTap={{ scale: 0.95 }}
-            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
-            {isDark ? <BsSun className="text-sm md:text-base" /> : <BsMoon className="text-sm md:text-base" />}
+            {isDark ? (
+              <BsSun className="text-sm md:text-base" />
+            ) : (
+              <BsMoon className="text-sm md:text-base" />
+            )}
           </motion.button>
 
           {socialItems.map((item) => (
@@ -200,9 +252,11 @@ const Navbar = () => {
           {/* Mobile Theme Toggle */}
           <motion.button
             onClick={toggleTheme}
-            className={`text-xl ${isDark ? 'text-blue-400' : 'text-blue-600'} p-2`}
+            className={`text-xl ${
+              isDark ? "text-blue-400" : "text-blue-600"
+            } p-2`}
             whileTap={{ scale: 0.9 }}
-            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
             {isDark ? <BsSun /> : <BsMoon />}
           </motion.button>
@@ -210,7 +264,9 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <motion.button
             ref={buttonRef}
-            className={`text-2xl ${isDark ? 'text-gray-300' : 'text-gray-800'} p-2`}
+            className={`text-2xl ${
+              isDark ? "text-gray-300" : "text-gray-800"
+            } p-2`}
             onClick={toggleMenu}
             aria-label="Toggle Menu"
             whileTap={{ scale: 0.9 }}
@@ -225,8 +281,11 @@ const Navbar = () => {
         {isMenuOpen && (
           <motion.div
             ref={menuRef}
-            className={`fixed top-[60px] left-0 w-full h-[calc(100vh-60px)] ${isDark ? 'bg-black/95' : 'bg-white/95'
-              } backdrop-blur-md border-b ${isDark ? 'border-gray-800/70' : 'border-gray-300'} md:hidden z-50 overflow-auto`}
+            className={`fixed top-[60px] left-0 w-full h-[calc(100vh-60px)] ${
+              isDark ? "bg-black/95" : "bg-white/95"
+            } backdrop-blur-md border-b ${
+              isDark ? "border-gray-800/70" : "border-gray-300"
+            } md:hidden z-50 overflow-auto`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -249,10 +308,15 @@ const Navbar = () => {
                   >
                     <a
                       href={item.href}
-                      className={`block w-full py-3 text-lg font-medium ${activeSection === item.href.substring(1)
-                        ? isDark ? "text-white" : "text-gray-900"
-                        : isDark ? "text-gray-400" : "text-gray-700"
-                        }`}
+                      className={`block w-full py-3 text-lg font-medium ${
+                        activeSection === item.href.substring(1)
+                          ? isDark
+                            ? "text-white"
+                            : "text-gray-900"
+                          : isDark
+                          ? "text-gray-400"
+                          : "text-gray-700"
+                      }`}
                       onClick={() => handleNavClick(item.href.substring(1))}
                     >
                       {item.name}
