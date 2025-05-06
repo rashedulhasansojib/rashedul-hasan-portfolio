@@ -6,6 +6,7 @@ import img5 from "../assets/5.png";
 
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 interface Project {
   src: string;
@@ -65,6 +66,9 @@ const projectsData: Project[] = [
 ];
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <motion.div
       className={`relative p-0.5 rounded-xl overflow-hidden group z-20`}
@@ -89,7 +93,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       />
 
       {/* Card content */}
-      <div className="relative flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-16 p-5 md:p-6 bg-black/60 backdrop-blur-md rounded-xl overflow-hidden z-10">
+      <div className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-16 p-5 md:p-6 ${isDark
+          ? 'bg-black/60'
+          : 'bg-white/70'
+        } backdrop-blur-md rounded-xl overflow-hidden z-10`}>
         {/* Project image */}
         <motion.div
           className="w-full md:w-2/5 flex-shrink-0 mb-6 md:mb-0"
@@ -120,7 +127,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               {project.title}
             </motion.h3>
             <motion.p
-              className="text-gray-300 leading-relaxed text-sm md:text-base"
+              className={`${isDark ? 'text-gray-300' : 'text-gray-800'} leading-relaxed text-sm md:text-base`}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -139,13 +146,15 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             {project.technologies.map((tech, index) => (
               <motion.span
                 key={index}
-                className="rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 border border-gray-700/50 px-3 py-1 md:px-4 md:py-1.5 text-xs md:text-sm font-medium"
+                className={`rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 ${isDark ? 'border-gray-700/50' : 'border-gray-300/70'
+                  } border px-3 py-1 md:px-4 md:py-1.5 text-xs md:text-sm font-medium ${isDark ? 'text-gray-200' : 'text-gray-700'
+                  }`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                 whileHover={{
                   scale: 1.05,
-                  color: "#fff",
+                  color: isDark ? "#fff" : "#3b82f6",
                   borderColor: "rgba(59, 130, 246, 0.5)",
                 }}
               >
@@ -181,7 +190,11 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               href={project.codeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 text-white text-sm md:text-base font-medium"
+              className={`px-4 md:px-6 py-2 md:py-2.5 rounded-full ${isDark
+                  ? 'bg-black/30 border-gray-700'
+                  : 'bg-gray-100/70 border-gray-300'
+                } backdrop-blur-sm border hover:border-blue-500/50 ${isDark ? 'text-white' : 'text-gray-800'
+                } text-sm md:text-base font-medium`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -195,6 +208,9 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 };
 
 const Projects = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   // Keep the repaint logic to fix visibility issues, but remove console logs
   useEffect(() => {
     // Force a repaint/reflow to help with visibility issues
@@ -222,7 +238,7 @@ const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-2 text-base md:text-lg text-gray-300"
+          className={`mt-2 text-base md:text-lg ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
         >
           Explore my portfolio of web applications and projects that showcase my skills and experience
         </motion.p>

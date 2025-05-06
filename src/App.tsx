@@ -9,7 +9,9 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import LoadingScreen from "./components/LoadingScreen";
 import { TransitionProvider } from "./context/TransitionContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import SectionTransition from "./components/SectionTransition";
+import { useTheme } from "./context/ThemeContext";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -33,14 +35,35 @@ const App = () => {
   }, []);
 
   return (
+    <ThemeProvider>
+      <AppContent loading={loading} onLoadingComplete={() => setLoading(false)} />
+    </ThemeProvider>
+  );
+};
+
+const AppContent = ({ loading, onLoadingComplete }: { loading: boolean, onLoadingComplete: () => void }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  return (
     <TransitionProvider>
       <AnimatePresence mode="wait">
         {loading ? (
-          <LoadingScreen key="loading" onLoadingComplete={() => setLoading(false)} />
+          <LoadingScreen key="loading" onLoadingComplete={onLoadingComplete} />
         ) : (
           <>
-            <div className="fixed -z-10 min-h-screen w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#7145E3_100%)]"></div>
-            <div className="fixed -z-10 top-0 w-full h-full overflow-hidden opacity-20">
+            {/* Dark mode gradient background */}
+            {isDark && (
+              <div className="fixed -z-10 min-h-screen w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#7145E3_100%)]"></div>
+            )}
+
+            {/* Light mode background */}
+            {!isDark && (
+              <div className="fixed -z-10 min-h-screen w-full bg-slate-50"></div>
+            )}
+
+            {/* Background orbs */}
+            <div className={`fixed -z-10 top-0 w-full h-full overflow-hidden ${isDark ? 'opacity-20' : 'opacity-10'}`}>
               <div className="absolute -top-40 -left-40 w-80 h-80 bg-blue-500 rounded-full blur-[100px]"></div>
               <div className="absolute top-[20%] right-10 w-60 h-60 bg-pink-500 rounded-full blur-[100px]"></div>
               <div className="absolute bottom-0 left-20 w-72 h-72 bg-indigo-500 rounded-full blur-[100px]"></div>

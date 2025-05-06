@@ -10,8 +10,12 @@ import {
   BsSend,
 } from "react-icons/bs";
 import { SOCIAL_LINKS } from "../constants/socials";
+import { useTheme } from "../context/ThemeContext";
 
 const Contact = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -78,7 +82,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-3 md:mb-4"
+          className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-3 md:mb-4"
         >
           Get in Touch
         </motion.h1>
@@ -86,7 +90,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-2 text-base md:text-lg text-gray-300"
+          className={`mt-2 text-base md:text-lg ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
         >
           Let's bring your ideas to life. Reach out and let's start a conversation!
         </motion.p>
@@ -98,9 +102,12 @@ const Contact = () => {
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full md:w-1/2 bg-black/20 backdrop-blur-sm border border-gray-800/50 p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl"
+          className={`w-full md:w-1/2 ${isDark
+              ? 'bg-black/20 border-gray-800/50'
+              : 'bg-white/40 border-gray-300'
+            } backdrop-blur-sm border p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl`}
         >
-          <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent mb-4 md:mb-6">
+          <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent mb-4 md:mb-6">
             Send a Message
           </h2>
 
@@ -128,7 +135,10 @@ const Contact = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="w-full rounded-lg bg-black/40 backdrop-blur-sm border border-gray-800/70 p-3 md:p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base"
+                  className={`w-full rounded-lg ${isDark
+                      ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
+                      : 'bg-white/70 border-gray-300 text-gray-800 placeholder-gray-500'
+                    } backdrop-blur-sm border p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base`}
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-to-r from-blue-500 to-pink-500 origin-left scale-x-0 transition-transform duration-300 group-focus-within:scale-x-100"></div>
               </motion.div>
@@ -148,7 +158,10 @@ const Contact = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="w-full rounded-lg bg-black/40 backdrop-blur-sm border border-gray-800/70 p-3 md:p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base"
+                  className={`w-full rounded-lg ${isDark
+                      ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
+                      : 'bg-white/70 border-gray-300 text-gray-800 placeholder-gray-500'
+                    } backdrop-blur-sm border p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 text-sm md:text-base`}
                 />
               </motion.div>
 
@@ -167,7 +180,10 @@ const Contact = () => {
                   }
                   required
                   rows={4}
-                  className="w-full rounded-lg bg-black/40 backdrop-blur-sm border border-gray-800/70 p-3 md:p-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none text-sm md:text-base"
+                  className={`w-full rounded-lg ${isDark
+                      ? 'bg-black/40 border-gray-800/70 text-white placeholder-gray-400'
+                      : 'bg-white/70 border-gray-300 text-gray-800 placeholder-gray-500'
+                    } backdrop-blur-sm border p-3 md:p-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none text-sm md:text-base`}
                 />
               </motion.div>
 
@@ -200,33 +216,26 @@ const Contact = () => {
               />
             </motion.button>
 
-            {/* Form status messages with animations */}
-            <div className="h-6 mt-2 md:mt-4">
-              {status === "success" && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-green-500 text-center flex items-center justify-center gap-2"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  Message sent successfully!
-                </motion.p>
-              )}
-              {status === "error" && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-red-500 text-center flex items-center justify-center gap-2"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  {errorMessage}
-                </motion.p>
-              )}
-            </div>
+            {/* Success/Error Messages */}
+            {status === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-3 md:p-4 rounded-lg bg-green-500/20 text-green-400 text-sm md:text-base border border-green-500/40"
+              >
+                Your message has been sent successfully! I'll get back to you soon.
+              </motion.div>
+            )}
+
+            {status === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-3 md:p-4 rounded-lg bg-red-500/20 text-red-400 text-sm md:text-base border border-red-500/40"
+              >
+                {errorMessage || "Something went wrong. Please try again."}
+              </motion.div>
+            )}
           </motion.form>
         </motion.div>
 
@@ -234,65 +243,78 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full md:w-1/2 bg-black/20 backdrop-blur-sm border border-gray-800/50 p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl flex flex-col justify-between"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className={`w-full md:w-1/2 ${isDark
+              ? 'bg-black/20 border-gray-800/50'
+              : 'bg-white/40 border-gray-300'
+            } backdrop-blur-sm border p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl flex flex-col justify-between gap-8`}
         >
           <div>
-            <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent mb-4 md:mb-6">
+            <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent mb-4 md:mb-6">
               Let's Connect
             </h2>
-            <p className="text-gray-300 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
-              Feel free to reach out for collaborations or just a friendly chat.
-              I'm always open to discussing new projects or opportunities to be
-              part of your visions. Looking forward to hearing from you!
+            <p className={`${isDark ? 'text-gray-300' : 'text-gray-700'} text-sm md:text-base leading-relaxed mb-6`}>
+              Feel free to reach out for collaborations, opportunities, or just to say hello! I'm always open to discussing new projects or creative ideas.
             </p>
+
+            <ul className="space-y-3 md:space-y-5">
+              <li className="flex items-center gap-3">
+                <span className={`${isDark ? 'text-blue-400' : 'text-blue-600'} text-base md:text-lg font-medium`}>
+                  Email:
+                </span>
+                <a
+                  href="mailto:rashedulhasansojib@gmail.com"
+                  className={`${isDark ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} transition-colors duration-300 text-sm md:text-base`}
+                >
+                  rashedulhasansojib@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <span className={`${isDark ? 'text-blue-400' : 'text-blue-600'} text-base md:text-lg font-medium`}>
+                  Location:
+                </span>
+                <span className={`${isDark ? 'text-gray-300' : 'text-gray-700'} text-sm md:text-base`}>
+                  Dhaka, Bangladesh
+                </span>
+              </li>
+            </ul>
           </div>
 
-          {/* Email and location info */}
-          <div className="space-y-4 mb-8 md:mb-10">
-            <div className="flex items-center gap-3">
-              <div className="p-2 md:p-3 rounded-full bg-blue-500/10 border border-blue-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <a href="mailto:rashedulhasansojib@gmail.com" className="text-gray-300 hover:text-white transition-colors text-sm md:text-base break-all">
-                rashedulhasansojib@gmail.com
-              </a>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="p-2 md:p-3 rounded-full bg-pink-500/10 border border-pink-500/30">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <span className="text-gray-300 text-sm md:text-base">
-                Dhaka, Bangladesh
-              </span>
-            </div>
-          </div>
-
-          {/* Social Links */}
           <div>
-            <h3 className="text-base md:text-lg font-medium text-white mb-3 md:mb-4">Find me on</h3>
-            <div className="flex flex-wrap gap-4 md:gap-5">
+            <h3 className={`${isDark ? 'text-gray-200' : 'text-gray-800'} text-base md:text-lg font-medium mb-4`}>
+              Follow me on social media:
+            </h3>
+            <div className="flex flex-wrap gap-3">
               <motion.a
-                href={SOCIAL_LINKS.YOUTUBE}
+                href={SOCIAL_LINKS.FACEBOOK}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="p-2.5 md:p-3 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"
+                className="p-3 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Facebook"
               >
-                <BsYoutube className="text-lg md:text-xl" />
+                <BsFacebook className="text-lg md:text-xl" />
+              </motion.a>
+              <motion.a
+                href={SOCIAL_LINKS.TWITTER}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-lg bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Twitter"
+              >
+                <BsTwitterX className="text-lg md:text-xl" />
               </motion.a>
               <motion.a
                 href={SOCIAL_LINKS.LINKEDIN}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="p-2.5 md:p-3 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+                className="p-3 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="LinkedIn"
               >
                 <BsLinkedin className="text-lg md:text-xl" />
               </motion.a>
@@ -300,28 +322,23 @@ const Contact = () => {
                 href={SOCIAL_LINKS.GITHUB}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="p-2.5 md:p-3 rounded-lg bg-orange-500/10 text-orange-400 hover:bg-orange-500/20 transition-colors"
+                className="p-3 rounded-lg bg-orange-500/10 text-orange-400 hover:bg-orange-500/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="GitHub"
               >
                 <BsGithub className="text-lg md:text-xl" />
               </motion.a>
               <motion.a
-                href={SOCIAL_LINKS.TWITTER}
+                href={SOCIAL_LINKS.YOUTUBE}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="p-2.5 md:p-3 rounded-lg bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-colors"
+                className="p-3 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="YouTube"
               >
-                <BsTwitterX className="text-lg md:text-xl" />
-              </motion.a>
-              <motion.a
-                href={SOCIAL_LINKS.FACEBOOK}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="p-2.5 md:p-3 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
-              >
-                <BsFacebook className="text-lg md:text-xl" />
+                <BsYoutube className="text-lg md:text-xl" />
               </motion.a>
             </div>
           </div>

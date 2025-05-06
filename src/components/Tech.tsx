@@ -8,8 +8,12 @@ import {
 } from "react-icons/bi";
 import { SiExpress, SiNextdotjs } from "react-icons/si";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 
 const Tech = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
   const variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
@@ -17,20 +21,36 @@ const Tech = () => {
 
   const technologies = [
     // MERN Stack
-    { icon: BiLogoMongodb, name: "MongoDB", color: "text-green-500", bgColor: "bg-green-500/10" },
-    { icon: SiExpress, name: "Express.js", color: "text-white", bgColor: "bg-white/10" },
-    { icon: BiLogoReact, name: "React", color: "text-blue-400", bgColor: "bg-blue-400/10" },
-    { icon: BiLogoNodejs, name: "Node.js", color: "text-green-500", bgColor: "bg-green-500/10" },
+    { icon: BiLogoMongodb, name: "MongoDB", 
+      darkColor: "text-green-500", darkBg: "bg-green-500/10",
+      lightColor: "text-green-700", lightBg: "bg-green-500/20" },
+    { icon: SiExpress, name: "Express.js", 
+      darkColor: "text-white", darkBg: "bg-white/10",
+      lightColor: "text-gray-800", lightBg: "bg-gray-400/20" },
+    { icon: BiLogoReact, name: "React", 
+      darkColor: "text-blue-400", darkBg: "bg-blue-400/10",
+      lightColor: "text-blue-600", lightBg: "bg-blue-400/20" },
+    { icon: BiLogoNodejs, name: "Node.js", 
+      darkColor: "text-green-500", darkBg: "bg-green-500/10",
+      lightColor: "text-green-700", lightBg: "bg-green-500/20" },
 
     // Styling
-    { icon: BiLogoTailwindCss, name: "Tailwind CSS", color: "text-cyan-400", bgColor: "bg-cyan-400/10" },
+    { icon: BiLogoTailwindCss, name: "Tailwind CSS", 
+      darkColor: "text-cyan-400", darkBg: "bg-cyan-400/10",
+      lightColor: "text-cyan-600", lightBg: "bg-cyan-400/20" },
 
     // Core Languages
-    { icon: BiLogoTypescript, name: "TypeScript", color: "text-blue-500", bgColor: "bg-blue-500/10" },
+    { icon: BiLogoTypescript, name: "TypeScript", 
+      darkColor: "text-blue-500", darkBg: "bg-blue-500/10",
+      lightColor: "text-blue-700", lightBg: "bg-blue-500/20" },
 
     // Additional Frameworks & Tools
-    { icon: SiNextdotjs, name: "Next.js", color: "text-gray-200", bgColor: "bg-gray-200/10" },
-    { icon: BiLogoGit, name: "Git", color: "text-orange-600", bgColor: "bg-orange-500/10" },
+    { icon: SiNextdotjs, name: "Next.js", 
+      darkColor: "text-gray-200", darkBg: "bg-gray-200/10",
+      lightColor: "text-gray-800", lightBg: "bg-gray-400/20" },
+    { icon: BiLogoGit, name: "Git", 
+      darkColor: "text-orange-600", darkBg: "bg-orange-500/10",
+      lightColor: "text-orange-700", lightBg: "bg-orange-500/20" },
   ];
 
   return (
@@ -47,7 +67,7 @@ const Tech = () => {
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-3 md:mb-4"
+          className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-3 md:mb-4"
         >
           Technologies
         </motion.h1>
@@ -56,7 +76,7 @@ const Tech = () => {
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-2 text-base md:text-lg text-gray-300 max-w-[600px] mx-auto"
+          className={`mt-2 text-base md:text-lg ${isDark ? 'text-gray-300' : 'text-gray-700'} max-w-[600px] mx-auto`}
         >
           These are the technologies I specialize in for creating modern, responsive web applications
         </motion.p>
@@ -69,7 +89,12 @@ const Tech = () => {
         transition={{ duration: 0.8 }}
       >
         {/* Styled container */}
-        <div className="bg-black/20 backdrop-blur-sm border border-gray-800/50 p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl">
+        <div className={`${
+          isDark 
+            ? 'bg-black/20 border-gray-800/50' 
+            : 'bg-white/50 border-gray-300'
+          } backdrop-blur-sm border p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl`}
+        >
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8 lg:gap-12">
             {technologies.map((tech, index) => (
               <motion.div
@@ -86,20 +111,24 @@ const Tech = () => {
                 className="flex flex-col items-center justify-center group"
               >
                 <motion.div
-                  className={`relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl p-4 sm:p-5 ${tech.bgColor} border border-gray-800/50 shadow-lg`}
+                  className={`relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl p-4 sm:p-5 ${
+                    isDark ? tech.darkBg : tech.lightBg
+                  } border ${
+                    isDark ? 'border-gray-800/50' : 'border-gray-300'
+                  } shadow-lg`}
                   whileHover={{
                     scale: 1.05,
                     boxShadow: "0 0 20px rgba(113, 69, 227, 0.4)"
                   }}
                 >
-                  <tech.icon className={`text-2xl sm:text-3xl md:text-4xl ${tech.color}`} />
+                  <tech.icon className={`text-2xl sm:text-3xl md:text-4xl ${isDark ? tech.darkColor : tech.lightColor}`} />
                   <motion.div
                     className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-500/30 to-pink-500/30 opacity-0 group-hover:opacity-100 blur-sm"
                     transition={{ duration: 0.2 }}
                   />
                 </motion.div>
                 <motion.p
-                  className={`mt-2 md:mt-3 text-center font-medium text-xs sm:text-sm md:text-base ${tech.color}`}
+                  className={`mt-2 md:mt-3 text-center font-medium text-xs sm:text-sm md:text-base ${isDark ? tech.darkColor : tech.lightColor}`}
                   initial={{ opacity: 0.7 }}
                   whileHover={{ opacity: 1, scale: 1.05 }}
                 >

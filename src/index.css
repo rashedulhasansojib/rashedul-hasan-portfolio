@@ -10,8 +10,51 @@
 body {
   overflow-x: hidden;
   width: 100%;
+  color: white;
+  background-color: #000;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Light/Dark Mode Utilities */
+.light-mode {
+  color: #1a202c;
+  background-color: #f8fafc;
+}
+
+.dark-mode {
+  color: white;
+  background-color: #000;
+}
+
+/* Apply theme classes conditionally */
+:root.light-mode body {
+  color: #1a202c;
+  background-color: #f8fafc;
+  font-weight: 400;
+}
+
+:root.dark-mode body {
+  color: white;
+  background-color: #000;
+}
+
+/* Light mode scrollbar */
+:root.light-mode ::-webkit-scrollbar-track {
+  background: rgba(240, 242, 245, 0.95);
+}
+
+:root.light-mode ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgb(59, 130, 246), rgb(219, 39, 119));
+}
+
+:root.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to top, rgb(59, 130, 246), rgb(219, 39, 119));
+}
+
+/* Dark mode scrollbar */
 ::-webkit-scrollbar {
   width: 20px;
 }
@@ -27,6 +70,91 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to top, rgb(0, 62, 196), rgb(184, 0, 153));
+}
+
+/* Utility classes for theme-specific styling */
+.dark-mode\:text-white {
+  .dark-mode & {
+    color: white;
+  }
+}
+
+.light-mode\:text-black {
+  .light-mode & {
+    color: #333;
+  }
+}
+
+.dark-mode\:bg-black\/80 {
+  .dark-mode & {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.light-mode\:bg-white\/80 {
+  .light-mode & {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.dark-mode\:bg-black\/95 {
+  .dark-mode & {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+}
+
+.light-mode\:bg-white\/95 {
+  .light-mode & {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.dark-mode\:text-gray-400 {
+  .dark-mode & {
+    color: rgb(156, 163, 175);
+  }
+}
+
+.light-mode\:text-gray-600 {
+  .light-mode & {
+    color: rgb(75, 85, 99);
+  }
+}
+
+.dark-mode\:hover\:text-white:hover {
+  .dark-mode & {
+    color: white;
+  }
+}
+
+.light-mode\:hover\:text-black:hover {
+  .light-mode & {
+    color: #333;
+  }
+}
+
+.dark-mode\:opacity-100 {
+  .dark-mode & {
+    opacity: 1;
+  }
+}
+
+.light-mode\:opacity-10 {
+  .light-mode & {
+    opacity: 0.1;
+  }
+}
+
+.dark-mode\:opacity-20 {
+  .dark-mode & {
+    opacity: 0.2;
+  }
+}
+
+.light-mode\:opacity-5 {
+  .light-mode & {
+    opacity: 0.05;
+  }
 }
 
 /* Mobile menu improvements */

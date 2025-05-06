@@ -6,11 +6,14 @@ import {
   BsYoutube,
   BsList,
   BsX,
+  BsSun,
+  BsMoon
 } from "react-icons/bs";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SOCIAL_LINKS } from "../constants/socials";
 import { useTransition } from "../context/TransitionContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +21,8 @@ const Navbar = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { currentSection, setIsTransitioning } = useTransition();
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     if (currentSection) {
@@ -118,7 +123,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 z-50 w-full border-b border-gray-800/70 bg-black/80 backdrop-blur-md py-4 md:py-5 px-4 md:px-8 lg:px-16"
+      className={`fixed top-0 z-50 w-full border-b ${isDark ? 'border-gray-800/70 bg-black/80' : 'border-gray-300 bg-white/90'} backdrop-blur-md py-4 md:py-5 px-4 md:px-8 lg:px-16`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -126,7 +131,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <motion.a
           href="#hero"
-          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-2xl md:text-3xl font-semibold transition-all duration-300"
+          className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent text-2xl md:text-3xl font-semibold transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => handleNavClick('hero')}
@@ -142,8 +147,8 @@ const Navbar = () => {
                 <a
                   href={item.href}
                   className={`relative px-2 py-1 text-base font-medium transition-all duration-300 ${activeSection === item.href.substring(1)
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white"
+                    ? isDark ? "text-white" : "text-gray-900"
+                    : isDark ? "text-gray-400 hover:text-white" : "text-gray-700 hover:text-gray-900"
                     }`}
                   onClick={() => handleNavClick(item.href.substring(1))}
                 >
@@ -161,8 +166,19 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Desktop Social Icons - Styled like Contact section */}
-        <div className="hidden md:flex gap-3">
+        {/* Desktop Social Icons & Theme Toggle */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Theme Toggle Button */}
+          <motion.button
+            onClick={toggleTheme}
+            className={`p-2 rounded-lg ${isDark ? 'bg-blue-500/10 text-blue-400 hover:bg-blue-500/20' : 'bg-blue-500/20 text-blue-600 hover:bg-blue-500/30'} transition-colors mr-2`}
+            whileHover={{ scale: 1.1, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <BsSun className="text-sm md:text-base" /> : <BsMoon className="text-sm md:text-base" />}
+          </motion.button>
+
           {socialItems.map((item) => (
             <motion.a
               key={item.name}
@@ -179,16 +195,29 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
-        <motion.button
-          ref={buttonRef}
-          className="text-2xl text-gray-300 md:hidden p-2"
-          onClick={toggleMenu}
-          aria-label="Toggle Menu"
-          whileTap={{ scale: 0.9 }}
-        >
-          {isMenuOpen ? <BsX /> : <BsList />}
-        </motion.button>
+        {/* Mobile Menu Buttons (Theme + Menu) */}
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile Theme Toggle */}
+          <motion.button
+            onClick={toggleTheme}
+            className={`text-xl ${isDark ? 'text-blue-400' : 'text-blue-600'} p-2`}
+            whileTap={{ scale: 0.9 }}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <BsSun /> : <BsMoon />}
+          </motion.button>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            ref={buttonRef}
+            className={`text-2xl ${isDark ? 'text-gray-300' : 'text-gray-800'} p-2`}
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+            whileTap={{ scale: 0.9 }}
+          >
+            {isMenuOpen ? <BsX /> : <BsList />}
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -196,7 +225,8 @@ const Navbar = () => {
         {isMenuOpen && (
           <motion.div
             ref={menuRef}
-            className="fixed top-[60px] left-0 w-full h-[calc(100vh-60px)] bg-black/95 backdrop-blur-md border-b border-gray-800/70 md:hidden z-50 overflow-auto"
+            className={`fixed top-[60px] left-0 w-full h-[calc(100vh-60px)] ${isDark ? 'bg-black/95' : 'bg-white/95'
+              } backdrop-blur-md border-b ${isDark ? 'border-gray-800/70' : 'border-gray-300'} md:hidden z-50 overflow-auto`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -220,8 +250,8 @@ const Navbar = () => {
                     <a
                       href={item.href}
                       className={`block w-full py-3 text-lg font-medium ${activeSection === item.href.substring(1)
-                        ? "text-white"
-                        : "text-gray-400"
+                        ? isDark ? "text-white" : "text-gray-900"
+                        : isDark ? "text-gray-400" : "text-gray-700"
                         }`}
                       onClick={() => handleNavClick(item.href.substring(1))}
                     >
