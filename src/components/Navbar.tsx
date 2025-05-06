@@ -38,25 +38,73 @@ const Navbar = () => {
     }
   };
 
+  // Toggle body class when menu is open/closed
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+  }, [isMenuOpen]);
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    // Close menu when changing sections on mobile
+    if (isMenuOpen) {
+      const links = document.querySelectorAll('a[href^="#"]');
+      const handleLinkClick = () => setIsMenuOpen(false);
+
+      links.forEach(link => {
+        link.addEventListener('click', handleLinkClick);
+      });
+
+      return () => {
+        links.forEach(link => {
+          link.removeEventListener('click', handleLinkClick);
+        });
+      };
+    }
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (
         menuRef.current &&
         !menuRef.current.contains(event.target as Node) &&
-        !buttonRef.current?.contains(event.target as Node)
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
       ) {
         setIsMenuOpen(false);
       }
     };
 
+    // Handle both mouse and touch events
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
   }, []);
+
+  // Handle ESC key to close menu
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isMenuOpen]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -89,6 +137,7 @@ const Navbar = () => {
           className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-2xl md:text-3xl font-semibold transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
+          onClick={() => setIsMenuOpen(false)}
         >
           Rashedul
         </motion.a>
@@ -140,7 +189,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <motion.button
           ref={buttonRef}
-          className="text-2xl text-gray-300 md:hidden"
+          className="text-2xl text-gray-300 md:hidden p-2"
           onClick={toggleMenu}
           aria-label="Toggle Menu"
           whileTap={{ scale: 0.9 }}
@@ -154,33 +203,34 @@ const Navbar = () => {
         {isMenuOpen && (
           <motion.div
             ref={menuRef}
-            className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-md border-b border-gray-800/70 md:hidden overflow-hidden"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            className="fixed top-[60px] left-0 w-full h-[calc(100vh-60px)] bg-black/95 backdrop-blur-md border-b border-gray-800/70 md:hidden z-50 overflow-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
             <motion.div
-              className="py-5 px-4"
+              className="py-8 px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.3 }}
             >
-              <ul className="flex flex-col items-center gap-5">
+              <ul className="flex flex-col items-center gap-6">
                 {menuItems.map((item, index) => (
                   <motion.li
                     key={item.name}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 + index * 0.1, duration: 0.3 }}
+                    className="w-full text-center"
                   >
                     <a
                       href={item.href}
-                      className={`text-lg font-medium ${activeSection === item.href.substring(1)
+                      className={`block w-full py-3 text-lg font-medium ${activeSection === item.href.substring(1)
                         ? "text-white"
                         : "text-gray-400"
                         }`}
-                      onClick={toggleMenu}
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
                     </a>
@@ -190,7 +240,7 @@ const Navbar = () => {
 
               {/* Mobile Social Icons - Styled like Contact section */}
               <motion.div
-                className="mt-6 flex justify-center gap-4"
+                className="mt-10 flex justify-center gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.3 }}
@@ -202,14 +252,14 @@ const Navbar = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.name}
-                    className={`p-2 rounded-lg ${item.bgColor} ${item.textColor} ${item.hoverBg} transition-colors`}
+                    className={`p-3 rounded-lg ${item.bgColor} ${item.textColor} ${item.hoverBg} transition-colors`}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.7 + index * 0.05, duration: 0.2 }}
                   >
-                    <item.icon className="text-base" />
+                    <item.icon className="text-lg" />
                   </motion.a>
                 ))}
               </motion.div>
