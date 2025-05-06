@@ -5,6 +5,8 @@ import img4 from "../assets/4.png";
 import img5 from "../assets/5.png";
 
 import { motion } from "framer-motion";
+import { useTransition } from "../context/TransitionContext";
+import { useEffect } from "react";
 
 interface Project {
   src: string;
@@ -66,7 +68,7 @@ const projectsData: Project[] = [
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   return (
     <motion.div
-      className={`relative p-0.5 rounded-xl overflow-hidden group ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+      className={`relative p-0.5 rounded-xl overflow-hidden group z-20`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: index * 0.1 }}
@@ -74,7 +76,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
     >
       {/* Animated border gradient */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-blue-500 to-pink-500 opacity-30"
+        className="absolute inset-0 bg-gradient-to-r from-blue-500 to-pink-500 opacity-30 z-0"
         animate={{
           background: [
             "linear-gradient(to right, rgb(59, 130, 246), rgb(219, 39, 119))",
@@ -88,10 +90,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       />
 
       {/* Card content */}
-      <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-16 p-6 bg-black/60 backdrop-blur-md rounded-xl overflow-hidden">
+      <div className="relative flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-16 p-5 md:p-6 bg-black/60 backdrop-blur-md rounded-xl overflow-hidden z-10">
         {/* Project image */}
         <motion.div
-          className="w-full md:w-2/5 flex-shrink-0"
+          className="w-full md:w-2/5 flex-shrink-0 mb-6 md:mb-0"
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.3 }}
         >
@@ -108,10 +110,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         </motion.div>
 
         {/* Project info */}
-        <div className="flex flex-col gap-5 md:gap-6 w-full md:w-3/5 text-center md:text-left">
-          <div className="space-y-3">
+        <div className="flex flex-col gap-4 md:gap-5 lg:gap-6 w-full md:w-3/5 text-center md:text-left">
+          <div className="space-y-2 md:space-y-3">
             <motion.h3
-              className="text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent"
+              className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -119,7 +121,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               {project.title}
             </motion.h3>
             <motion.p
-              className="text-gray-300 leading-relaxed"
+              className="text-gray-300 leading-relaxed text-sm md:text-base"
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -130,7 +132,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
           {/* Technologies */}
           <motion.div
-            className="flex flex-wrap gap-3 justify-center md:justify-start"
+            className="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -138,7 +140,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             {project.technologies.map((tech, index) => (
               <motion.span
                 key={index}
-                className="rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 border border-gray-700/50 px-4 py-1.5 text-sm font-medium"
+                className="rounded-full bg-gradient-to-r from-blue-500/10 to-pink-500/10 border border-gray-700/50 px-3 py-1 md:px-4 md:py-1.5 text-xs md:text-sm font-medium"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
@@ -155,7 +157,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
           {/* Buttons */}
           <motion.div
-            className="flex gap-4 justify-center md:justify-start mt-2"
+            className="flex gap-3 md:gap-4 justify-center md:justify-start mt-2"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -164,7 +166,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               href={project.demoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative overflow-hidden px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white font-medium group"
+              className="relative overflow-hidden px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white text-sm md:text-base font-medium group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -180,7 +182,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               href={project.codeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 text-white font-medium"
+              className="px-4 md:px-6 py-2 md:py-2.5 rounded-full bg-black/30 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 text-white text-sm md:text-base font-medium"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -194,17 +196,32 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 };
 
 const Projects = () => {
+  const { currentSection } = useTransition();
+
+  useEffect(() => {
+    console.log("Projects component rendered", currentSection);
+  }, [currentSection]);
+
+  useEffect(() => {
+    console.log("Projects component mounted");
+    // Force a repaint/reflow to help with visibility issues
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.style.display = 'none';
+      setTimeout(() => {
+        projectsSection.style.display = '';
+      }, 10);
+    }
+  }, []);
+
   return (
-    <div
-      id="projects"
-      className="flex min-h-screen w-full flex-col items-center justify-center gap-24 py-20 px-4 md:px-8 lg:px-16"
-    >
-      <div className="text-center max-w-3xl mx-auto">
+    <div className="w-full relative z-10" style={{ visibility: 'visible', opacity: 1 }}>
+      <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16 px-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-4xl font-light md:text-6xl tracking-tight mb-4"
+          className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-3xl md:text-4xl lg:text-6xl font-light tracking-tight mb-3 md:mb-4"
         >
           Projects
         </motion.h1>
@@ -212,13 +229,13 @@ const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-2 text-lg text-gray-300"
+          className="mt-2 text-base md:text-lg text-gray-300"
         >
           Explore my portfolio of web applications and projects that showcase my skills and experience
         </motion.p>
       </div>
 
-      <div className="w-full max-w-6xl mx-auto flex flex-col gap-16 md:gap-24">
+      <div className="flex flex-col gap-12 md:gap-16 lg:gap-24 w-full max-w-6xl mx-auto px-4 md:px-6">
         {projectsData.map((project, index) => (
           <ProjectCard key={project.title} project={project} index={index} />
         ))}

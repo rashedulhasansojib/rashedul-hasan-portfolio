@@ -10,33 +10,20 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SOCIAL_LINKS } from "../constants/socials";
+import { useTransition } from "../context/TransitionContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const { currentSection, setIsTransitioning } = useTransition();
 
-  const handleScroll = () => {
-    const sections = ["hero", "about", "tech", "projects", "contact"];
-    const scrollPosition = window.scrollY + 300;
-
-    for (const section of sections) {
-      const element = document.getElementById(section);
-      if (!element) continue;
-
-      const offsetTop = element.offsetTop;
-      const offsetHeight = element.offsetHeight;
-
-      if (
-        scrollPosition >= offsetTop &&
-        scrollPosition < offsetTop + offsetHeight
-      ) {
-        setActiveSection(section);
-        break;
-      }
+  useEffect(() => {
+    if (currentSection) {
+      setActiveSection(currentSection);
     }
-  };
+  }, [currentSection]);
 
   // Toggle body class when menu is open/closed
   useEffect(() => {
@@ -46,11 +33,6 @@ const Navbar = () => {
       document.body.classList.remove('menu-open');
     }
   }, [isMenuOpen]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     // Close menu when changing sections on mobile
@@ -108,6 +90,16 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const handleNavClick = (sectionId: string) => {
+    setIsTransitioning(true);
+    setIsMenuOpen(false);
+
+    // Small delay to allow for smoother transitions
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
+  };
+
   const menuItems = [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
@@ -137,7 +129,7 @@ const Navbar = () => {
           className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-2xl md:text-3xl font-semibold transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => setIsMenuOpen(false)}
+          onClick={() => handleNavClick('hero')}
         >
           Rashedul
         </motion.a>
@@ -153,6 +145,7 @@ const Navbar = () => {
                     ? "text-white"
                     : "text-gray-400 hover:text-white"
                     }`}
+                  onClick={() => handleNavClick(item.href.substring(1))}
                 >
                   {item.name}
                   {activeSection === item.href.substring(1) && (
@@ -230,7 +223,7 @@ const Navbar = () => {
                         ? "text-white"
                         : "text-gray-400"
                         }`}
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => handleNavClick(item.href.substring(1))}
                     >
                       {item.name}
                     </a>

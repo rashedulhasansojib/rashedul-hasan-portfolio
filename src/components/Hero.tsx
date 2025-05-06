@@ -1,9 +1,11 @@
 import image from "../assets/hero.png";
 import { motion, useReducedMotion } from "framer-motion";
 import { HiDownload, HiChevronDown } from "react-icons/hi";
+import { useTransition } from "../context/TransitionContext";
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { currentSection } = useTransition();
 
   const animationProps = shouldReduceMotion
     ? {
@@ -14,11 +16,7 @@ const Hero = () => {
     : {};
 
   return (
-    <section
-      id="hero"
-      aria-label="Hero section"
-      className="min-h-[100vh] w-full flex flex-col items-center justify-center relative pt-16 pb-24"
-    >
+    <>
       {/* Content wrapper */}
       <div className="flex flex-col items-center justify-center w-full px-4 md:px-16 lg:px-32 h-full">
         <div className="flex flex-col items-center justify-center gap-6 md:gap-8 text-white max-w-5xl mx-auto">
@@ -123,7 +121,7 @@ const Hero = () => {
           </motion.div>
         </a>
       </div>
-    </section>
+    </>
   );
 };
 

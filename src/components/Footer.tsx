@@ -23,24 +23,24 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full border-t border-gray-700 bg-black/70 backdrop-blur-md mt-32">
-      <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <footer className="w-full border-t border-gray-700 bg-black/70 backdrop-blur-md mt-20 md:mt-32">
+      <div className="mx-auto max-w-7xl px-4 py-8 md:py-12 md:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
           {/* Brand Section */}
           <motion.div
             variants={variants}
             initial="hidden"
             whileInView="visible"
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center md:items-start gap-4"
+            className="flex flex-col items-center md:items-start gap-3 md:gap-4"
           >
             <a
               href="#hero"
-              className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-2xl font-semibold"
+              className="bg-gradient-to-r from-blue-400 to-pink-500 bg-clip-text text-transparent text-xl sm:text-2xl font-semibold"
             >
               Rashedul
             </a>
-            <p className="text-gray-400 text-center md:text-left">
+            <p className="text-gray-400 text-center md:text-left text-sm md:text-base">
               Building digital experiences with passion and precision.
             </p>
           </motion.div>
@@ -51,37 +51,37 @@ const Footer = () => {
             initial="hidden"
             whileInView="visible"
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center md:items-start gap-4"
+            className="flex flex-col items-center md:items-start gap-3 md:gap-4"
           >
-            <h3 className="text-white text-lg font-medium">Quick Links</h3>
-            <div className="flex flex-col items-center md:items-start gap-2">
+            <h3 className="text-white text-base md:text-lg font-medium">Quick Links</h3>
+            <div className="flex flex-col items-center md:items-start gap-1.5 md:gap-2">
               <a
                 href="#hero"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
               >
                 Home
               </a>
               <a
                 href="#about"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
               >
                 About
               </a>
               <a
                 href="#tech"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
               >
                 Tech
               </a>
               <a
                 href="#projects"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
               >
                 Projects
               </a>
               <a
                 href="#contact"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-gray-400 hover:text-white transition-colors text-sm md:text-base"
               >
                 Contact
               </a>
@@ -94,10 +94,10 @@ const Footer = () => {
             initial="hidden"
             whileInView="visible"
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col items-center md:items-start gap-4"
+            className="flex flex-col items-center sm:items-center md:items-start gap-3 md:gap-4"
           >
-            <h3 className="text-white text-lg font-medium">Connect</h3>
-            <div className="flex gap-4">
+            <h3 className="text-white text-base md:text-lg font-medium">Connect</h3>
+            <div className="flex gap-3 md:gap-4">
               {socialItems.map((item) => (
                 <motion.a
                   key={item.name}
@@ -109,7 +109,7 @@ const Footer = () => {
                   whileHover={{ scale: 1.1, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <item.icon className="text-base" />
+                  <item.icon className="text-sm md:text-base" />
                 </motion.a>
               ))}
             </div>
@@ -122,10 +122,10 @@ const Footer = () => {
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-10 pt-6 border-t border-gray-800 text-center"
+          className="mt-8 md:mt-10 pt-4 md:pt-6 border-t border-gray-800 text-center"
         >
-          <p className="text-gray-400 text-sm leading-relaxed max-w-2xl mx-auto">
-            Loosely designed in Figma and coded in Visual Studio Code by yours truly.
+          <p className="text-gray-400 text-xs md:text-sm leading-relaxed max-w-2xl mx-auto">
+            Loosely designed in Figma and coded in Visual Studio Code by yours truly — with the occasional whisper from “Jarvis”.
             Built with React, TypeScript, and Tailwind CSS, deployed with Vercel.
             All text is set in the Poppins typeface.
           </p>
@@ -137,9 +137,9 @@ const Footer = () => {
           initial="hidden"
           whileInView="visible"
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 border-t border-gray-800 pt-8 text-center"
+          className="mt-6 md:mt-8 border-t border-gray-800 pt-6 md:pt-8 text-center"
         >
-          <p className="text-gray-400">
+          <p className="text-gray-400 text-xs md:text-sm">
             © {new Date().getFullYear()} Rashedul Hasan. All rights reserved.
           </p>
         </motion.div>

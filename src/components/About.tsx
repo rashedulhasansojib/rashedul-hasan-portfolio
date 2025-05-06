@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { HiArrowRight } from "react-icons/hi";
+import { useTransition } from "../context/TransitionContext";
 
 const About = () => {
+  const { currentSection } = useTransition();
+
   const variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
@@ -19,10 +22,7 @@ const About = () => {
   ];
 
   return (
-    <div
-      id="about"
-      className="flex min-h-screen w-full flex-col items-center justify-center gap-16 py-20 px-4 md:px-16 relative"
-    >
+    <>
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden -z-10 opacity-30">
         <div className="absolute top-0 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-[100px]"></div>
@@ -141,7 +141,7 @@ const About = () => {
           ))}
         </motion.div>
       </div>
-    </div>
+    </>
   );
 };
 
