@@ -1,4 +1,4 @@
-import image from "../assets/hero.png";
+import image from "../assets/rashedul.png";
 import { motion, useReducedMotion } from "framer-motion";
 import { HiDownload, HiChevronDown } from "react-icons/hi";
 import { useTheme } from "../context/ThemeContext";
